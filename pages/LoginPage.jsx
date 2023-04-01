@@ -30,35 +30,35 @@ export default function LoginPage() {
    
  
   return (
-    <div class="h-screen flex flex-col items-center justify-center">
-      <div class="m-auto lg:w-1/3">
-        <div class="authentication-wrapper authentication-basic container-p-y ">
-          <div class="authentication-inner">
-            <div class="card">
-              <div class="card-body">
-                <div class="app-brand justify-content-center">
-                  <a href="index.html" class="app-brand-link gap-2">
-                    <span class="app-brand-logo demo"></span>
-                    <span class="app-brand-text demo text-body fw-bolder p-6">
+    <div className="h-screen flex flex-col items-center justify-center">
+      <div className="m-auto lg:w-1/3">
+        <div className="authentication-wrapper authentication-basic container-p-y ">
+          <div className="authentication-inner">
+            <div className="card">
+              <div className="card-body">
+                <div className="app-brand justify-content-center">
+                  <a href="index.html" className="app-brand-link gap-2">
+                    <span className="app-brand-logo demo"></span>
+                    <span className="app-brand-text demo text-body fw-bolder p-6">
                       WIB-portail
                     </span>
                   </a>
                 </div>
-                <h4 class="mb-2">Welcome to Sneat! 👋</h4>
-                <p class="mb-4">
+                <h4 className="mb-2">Welcome to Sneat! 👋</h4>
+                <p className="mb-4">
                   Please sign-in to your account and start the adventure
                 </p>
                 <div
                   id="formAuthentication"
-                  class="mb-3"
+                  className="mb-3"
                 >
-                  <div class="mb-3">
-                    <label for="email" class="form-label">
+                  <div className="mb-3">
+                    <label for="email" className="form-label">
                       Email or Username
                     </label>
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       id="email"
                       name="email-username"
                       placeholder="Enter your email or username"
@@ -67,20 +67,20 @@ export default function LoginPage() {
                       }
                     />
                   </div>
-                  <div class="mb-3 form-password-toggle">
-                    <div class="d-flex justify-content-between">
-                      <label class="form-label" for="password">
+                  <div className="mb-3 form-password-toggle">
+                    <div className="d-flex justify-content-between">
+                      <label className="form-label" for="password">
                         Password
                       </label>
                       <a href="auth-forgot-password-basic.html">
                         <small>Forgot Password?</small>
                       </a>
                     </div>
-                    <div class="input-group input-group-merge">
+                    <div className="input-group input-group-merge">
                       <input
                         type="password"
                         id="password"
-                        class="form-control"
+                        className="form-control"
                         name="password"
                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                         aria-describedby="password"
@@ -88,32 +88,32 @@ export default function LoginPage() {
                           serUser({ ...user, password: e.target.value })
                         }
                       />
-                      <span class="input-group-text cursor-pointer">
-                        <i class="bx bx-hide"></i>
+                      <span className="input-group-text cursor-pointer">
+                        <i className="bx bx-hide"></i>
                       </span>
                     </div>
                   </div>
-                  <div class="mb-3">
-                    <div class="form-check">
+                  <div className="mb-3">
+                    <div className="form-check">
                       <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="checkbox"
                         id="remember-me"
                       />
-                      <label class="form-check-label" for="remember-me">
+                      <label className="form-check-label" for="remember-me">
                         {" "}
                         Remember Me{" "}
                       </label>
                     </div>
                   </div>
-                  <div class="mb-3">
-                    <button class="btn btn-primary d-grid w-100" onClick={()=>handleLogin()} >
+                  <div className="mb-3">
+                    <button className="btn btn-primary d-grid w-100" onClick={()=>handleLogin()} >
                       Sign in
                     </button>
                   </div>
                 </div>
 
-                <p class="text-center">
+                <p className="text-center">
                   <span>New on our platform?</span>
                   <Link href="/RolesPage">
                     <span>Create an account</span>

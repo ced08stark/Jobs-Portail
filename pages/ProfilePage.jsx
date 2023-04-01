@@ -4,103 +4,103 @@ import Image from 'next/image';
 
 function ProfilePage() {
   return (
-    <div class="layout-wrapper layout-content-navbar">
-      <div class="layout-container">
+    <div className="layout-wrapper layout-content-navbar">
+      <div className="layout-container">
     
-        <div class="layout-page">
+        <div className="layout-page">
         
 
-          <div class="content-wrapper">
-            <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4">
-                <span class="text-muted fw-light">Account Settings /</span>{" "}
+          <div className="content-wrapper">
+            <div className="container-xxl flex-grow-1 container-p-y">
+              <h4 className="fw-bold py-3 mb-4">
+                <span className="text-muted fw-light">Account Settings /</span>{" "}
                 Account
               </h4>
 
-              <div class="row">
-                <div class="col-md-12">
-                  <ul class="nav nav-pills flex-column flex-md-row mb-3">
-                    <li class="nav-item">
-                      <a class="nav-link active" href="javascript:void(0);">
-                        <i class="bx bx-user me-1"></i> Account
+              <div className="row">
+                <div className="col-md-12">
+                  <ul className="nav nav-pills flex-column flex-md-row mb-3">
+                    <li className="nav-item">
+                      <a className="nav-link active" >
+                        <i className="bx bx-user me-1"></i> Account
                       </a>
                     </li>
-                    <li class="nav-item">
+                    <li className="nav-item">
                       <a
-                        class="nav-link"
+                        className="nav-link"
                         href="pages-account-settings-notifications.html"
                       >
-                        <i class="bx bx-bell me-1"></i> Notifications
+                        <i className="bx bx-bell me-1"></i> Notifications
                       </a>
                     </li>
-                    <li class="nav-item">
+                    <li className="nav-item">
                       <a
-                        class="nav-link"
+                        className="nav-link"
                         href="pages-account-settings-connections.html"
                       >
-                        <i class="bx bx-link-alt me-1"></i> Connections
+                        <i className="bx bx-link-alt me-1"></i> Connections
                       </a>
                     </li>
                   </ul>
-                  <div class="card mb-4">
-                    <h5 class="card-header">Profile Details</h5>
+                  <div className="card mb-4">
+                    <h5 className="card-header">Profile Details</h5>
 
-                    <div class="card-body">
-                      <div class="d-flex align-items-start align-items-sm-center gap-4">
+                    <div className="card-body">
+                      <div className="d-flex align-items-start align-items-sm-center gap-4">
                         <Image
                           src={require("../assets/img/avatars/1.png")}
                           alt="user-avatar"
-                          class="d-block rounded"
+                          className="d-block rounded"
                           width={100}
                           height={100}
                           id="uploadedAvatar"
                         />
-                        <div class="button-wrapper">
+                        <div className="button-wrapper">
                           <label
                             for="upload"
-                            class="btn btn-primary me-2 mb-4"
+                            className="btn btn-primary me-2 mb-4"
                             tabindex="0"
                           >
-                            <span class="d-none d-sm-block">
+                            <span className="d-none d-sm-block">
                               Upload new photo
                             </span>
-                            <i class="bx bx-upload d-block d-sm-none"></i>
+                            <i className="bx bx-upload d-block d-sm-none"></i>
                             <input
                               type="file"
                               id="upload"
-                              class="account-file-input"
+                              className="account-file-input"
                               hidden
                               accept="image/png, image/jpeg"
                             />
                           </label>
                           <button
                             type="button"
-                            class="btn btn-outline-secondary account-image-reset mb-4"
+                            className="btn btn-outline-secondary account-image-reset mb-4"
                           >
-                            <i class="bx bx-reset d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Reset</span>
+                            <i className="bx bx-reset d-block d-sm-none"></i>
+                            <span className="d-none d-sm-block">Reset</span>
                           </button>
 
-                          <p class="text-muted mb-0">
+                          <p className="text-muted mb-0">
                             Allowed JPG, GIF or PNG. Max size of 800K
                           </p>
                         </div>
                       </div>
                     </div>
-                    <hr class="my-0" />
-                    <div class="card-body">
+                    <hr className="my-0" />
+                    <div className="card-body">
                       <form
                         id="formAccountSettings"
                         method="POST"
                         onsubmit="return false"
                       >
-                        <div class="row">
-                          <div class="mb-3 col-md-6">
-                            <label for="firstName" class="form-label">
+                        <div className="row">
+                          <div className="mb-3 col-md-6">
+                            <label for="firstName" className="form-label">
                               First Name
                             </label>
                             <input
-                              class="form-control"
+                              className="form-control"
                               type="text"
                               id="firstName"
                               name="firstName"
@@ -108,24 +108,24 @@ function ProfilePage() {
                               autofocus
                             />
                           </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="lastName" class="form-label">
+                          <div className="mb-3 col-md-6">
+                            <label for="lastName" className="form-label">
                               Last Name
                             </label>
                             <input
-                              class="form-control"
+                              className="form-control"
                               type="text"
                               name="lastName"
                               id="lastName"
                               value="Doe"
                             />
                           </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="email" class="form-label">
+                          <div className="mb-3 col-md-6">
+                            <label for="email" className="form-label">
                               E-mail
                             </label>
                             <input
-                              class="form-control"
+                              className="form-control"
                               type="text"
                               id="email"
                               name="email"
@@ -133,75 +133,75 @@ function ProfilePage() {
                               placeholder="john.doe@example.com"
                             />
                           </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="organization" class="form-label">
+                          <div className="mb-3 col-md-6">
+                            <label for="organization" className="form-label">
                               Organization
                             </label>
                             <input
                               type="text"
-                              class="form-control"
+                              className="form-control"
                               id="organization"
                               name="organization"
                               value="ThemeSelection"
                             />
                           </div>
-                          <div class="mb-3 col-md-6">
-                            <label class="form-label" for="phoneNumber">
+                          <div className="mb-3 col-md-6">
+                            <label className="form-label" for="phoneNumber">
                               Phone Number
                             </label>
-                            <div class="input-group input-group-merge">
-                              <span class="input-group-text">US (+1)</span>
+                            <div className="input-group input-group-merge">
+                              <span className="input-group-text">US (+1)</span>
                               <input
                                 type="text"
                                 id="phoneNumber"
                                 name="phoneNumber"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="202 555 0111"
                               />
                             </div>
                           </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="address" class="form-label">
+                          <div className="mb-3 col-md-6">
+                            <label for="address" className="form-label">
                               Address
                             </label>
                             <input
                               type="text"
-                              class="form-control"
+                              className="form-control"
                               id="address"
                               name="address"
                               placeholder="Address"
                             />
                           </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="state" class="form-label">
+                          <div className="mb-3 col-md-6">
+                            <label for="state" className="form-label">
                               State
                             </label>
                             <input
-                              class="form-control"
+                              className="form-control"
                               type="text"
                               id="state"
                               name="state"
                               placeholder="California"
                             />
                           </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="zipCode" class="form-label">
+                          <div className="mb-3 col-md-6">
+                            <label for="zipCode" className="form-label">
                               Zip Code
                             </label>
                             <input
                               type="text"
-                              class="form-control"
+                              className="form-control"
                               id="zipCode"
                               name="zipCode"
                               placeholder="231465"
                               maxlength="6"
                             />
                           </div>
-                          <div class="mb-3 col-md-6">
-                            <label class="form-label" for="country">
+                          <div className="mb-3 col-md-6">
+                            <label className="form-label" for="country">
                               Country
                             </label>
-                            <select id="country" class="select2 form-select">
+                            <select id="country" className="select2 form-select">
                               <option value="">Select</option>
                               <option value="Australia">Australia</option>
                               <option value="Bangladesh">Bangladesh</option>
@@ -235,11 +235,11 @@ function ProfilePage() {
                               </option>
                             </select>
                           </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="language" class="form-label">
+                          <div className="mb-3 col-md-6">
+                            <label for="language" className="form-label">
                               Language
                             </label>
-                            <select id="language" class="select2 form-select">
+                            <select id="language" className="select2 form-select">
                               <option value="">Select Language</option>
                               <option value="en">English</option>
                               <option value="fr">French</option>
@@ -247,11 +247,11 @@ function ProfilePage() {
                               <option value="pt">Portuguese</option>
                             </select>
                           </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="timeZones" class="form-label">
+                          <div className="mb-3 col-md-6">
+                            <label for="timeZones" className="form-label">
                               Timezone
                             </label>
-                            <select id="timeZones" class="select2 form-select">
+                            <select id="timeZones" className="select2 form-select">
                               <option value="">Select Timezone</option>
                               <option value="-12">
                                 (GMT-12:00) International Date Line West
@@ -303,11 +303,11 @@ function ProfilePage() {
                               </option>
                             </select>
                           </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="currency" class="form-label">
+                          <div className="mb-3 col-md-6">
+                            <label for="currency" className="form-label">
                               Currency
                             </label>
-                            <select id="currency" class="select2 form-select">
+                            <select id="currency" className="select2 form-select">
                               <option value="">Select Currency</option>
                               <option value="usd">USD</option>
                               <option value="euro">Euro</option>
@@ -316,13 +316,13 @@ function ProfilePage() {
                             </select>
                           </div>
                         </div>
-                        <div class="mt-2">
-                          <button type="submit" class="btn btn-primary me-2">
+                        <div className="mt-2">
+                          <button type="submit" className="btn btn-primary me-2">
                             Save changes
                           </button>
                           <button
                             type="reset"
-                            class="btn btn-outline-secondary"
+                            className="btn btn-outline-secondary"
                           >
                             Cancel
                           </button>
@@ -330,15 +330,15 @@ function ProfilePage() {
                       </form>
                     </div>
                   </div>
-                  <div class="card">
-                    <h5 class="card-header">Delete Account</h5>
-                    <div class="card-body">
-                      <div class="mb-3 col-12">
-                        <div class="alert alert-warning">
-                          <h6 class="alert-heading fw-bold mb-1">
+                  <div className="card">
+                    <h5 className="card-header">Delete Account</h5>
+                    <div className="card-body">
+                      <div className="mb-3 col-12">
+                        <div className="alert alert-warning">
+                          <h6 className="alert-heading fw-bold mb-1">
                             Are you sure you want to delete your account?
                           </h6>
-                          <p class="mb-0">
+                          <p className="mb-0">
                             Once you delete your account, there is no going
                             back. Please be certain.
                           </p>
@@ -348,15 +348,15 @@ function ProfilePage() {
                         id="formAccountDeactivation"
                         onsubmit="return false"
                       >
-                        <div class="form-check mb-3">
+                        <div className="form-check mb-3">
                           <input
-                            class="form-check-input"
+                            className="form-check-input"
                             type="checkbox"
                             name="accountActivation"
                             id="accountActivation"
                           />
                           <label
-                            class="form-check-label"
+                            className="form-check-label"
                             for="accountActivation"
                           >
                             I confirm my account deactivation
@@ -364,7 +364,7 @@ function ProfilePage() {
                         </div>
                         <button
                           type="submit"
-                          class="btn btn-danger deactivate-account"
+                          className="btn btn-danger deactivate-account"
                         >
                           Deactivate Account
                         </button>
@@ -375,14 +375,14 @@ function ProfilePage() {
               </div>
             </div>
 
-            <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
+            <footer className="content-footer footer bg-footer-theme">
+              <div className="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                <div className="mb-2 mb-md-0">
                   ©<script>2023</script>, made with ❤️ by
                   <a
                     href="https://themeselection.com"
                     target="_blank"
-                    class="footer-link fw-bolder"
+                    className="footer-link fw-bolder"
                   >
                     ThemeSelection
                   </a>
@@ -390,7 +390,7 @@ function ProfilePage() {
                 <div>
                   <a
                     href="https://themeselection.com/license/"
-                    class="footer-link me-4"
+                    className="footer-link me-4"
                     target="_blank"
                   >
                     License
@@ -398,7 +398,7 @@ function ProfilePage() {
                   <a
                     href="https://themeselection.com/"
                     target="_blank"
-                    class="footer-link me-4"
+                    className="footer-link me-4"
                   >
                     More Themes
                   </a>
@@ -406,7 +406,7 @@ function ProfilePage() {
                   <a
                     href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
                     target="_blank"
-                    class="footer-link me-4"
+                    className="footer-link me-4"
                   >
                     Documentation
                   </a>
@@ -414,7 +414,7 @@ function ProfilePage() {
                   <a
                     href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
                     target="_blank"
-                    class="footer-link me-4"
+                    className="footer-link me-4"
                   >
                     Support
                   </a>
@@ -422,7 +422,7 @@ function ProfilePage() {
               </div>
             </footer>
 
-            <div class="content-backdrop fade"></div>
+            <div className="content-backdrop fade"></div>
           </div>
         </div>
       </div>

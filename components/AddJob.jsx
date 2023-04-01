@@ -29,12 +29,12 @@ function AddJob() {
     
   return (
     <section
-      class="fixed z-50  inset-0 w-full h-full dark:text-white  flex items-center justify-center transition-all duration-300 scale-0"
+      className="fixed z-50  inset-0 w-full h-full dark:text-white  flex items-center justify-center transition-all duration-300 scale-0"
       id="lightbox"
       onClick={handleAddProjet}
     >
       <div
-        class="flex-col space-y-3  flex rounded-md bg-white dark:bg-gray-800 w-[80%]  sm:w-1/2 h-[600px]  overflow-hidden  sm:p-0 shadow-lg shadow-black "
+        className="flex-col space-y-3  flex rounded-md bg-white dark:bg-gray-800 w-[80%]  sm:w-1/2 h-[600px]  overflow-hidden  sm:p-0 shadow-lg shadow-black "
         id="lightbox-body"
       >
         <div className="flex justify-between items-center p-4">

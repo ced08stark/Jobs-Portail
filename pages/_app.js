@@ -4,6 +4,7 @@ import "../assets/vendor/css/theme-default.css";
 import "../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css";
 import "../assets/vendor/libs/apex-charts/apex-charts.css";
 import "../assets/vendor/fonts/boxicons.css";
+import "../assets/vendor/css/core.css";
 import Router from 'next/router';
 import ProgressBar from "@badrap/bar-of-progress";
 import Head from "next/head";
@@ -29,7 +30,7 @@ Router.events.on('routeChangeError', progress.finish);
 
 export default function App({ Component, pageProps }) {
   const [showProfile, setShowProfile] = useState(false);
-  const [showSide, setShowSide] = useState(false);
+ 
   const [currentAdmin, setCurrentAdmin] = useState("");
   const handleClickprofile = () => {
     if (showProfile) {
@@ -40,11 +41,9 @@ export default function App({ Component, pageProps }) {
   };
 
   const handleClickMenu = () => {
-    if (showSide) {
-      setShowSide(false);
-    } else {
-      setShowSide(true);
-    }
+    const sideBar = document.querySelector('#layout-menu')
+    sideBar.classList.remove("translate"); 
+    
   };
 
   if(Component.getLayout){
@@ -64,47 +63,48 @@ export default function App({ Component, pageProps }) {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <div class="layout-wrapper layout-content-navbar">
-          <div class="layout-container">
+        <div className="layout-wrapper layout-content-navbar">
+          
+          <div className="layout-container">
             {<SideBar />}
 
-            <div class="layout-page">
+            <div className="layout-page">
               <nav
-                class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme z-0"
+                className="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme z-0"
                 id="layout-navbar"
               >
                 <div
-                  class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none"
-                  onClick={() => console.log("toto")}
+                  className="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none z-40"
+                  onClick={() => handleClickMenu()}
                 >
                   <a
-                    class="nav-item nav-link px-0 me-xl-4"
-                    href="javascript:void(0)"
+                    className="nav-item nav-link px-0 me-xl-4"
+                    
                   >
-                    <i class="bx bx-menu bx-sm"></i>
+                    <i className="bx bx-menu bx-sm"></i>
                   </a>
                 </div>
 
                 <div
-                  class="navbar-nav-right d-flex align-items-center"
+                  className="navbar-nav-right d-flex align-items-center"
                   id="navbar-collapse"
                 >
-                  <div class="navbar-nav align-items-center">
-                    <div class="nav-item d-flex align-items-center">
-                      <i class="bx bx-search fs-4 lh-0"></i>
+                  <div className="navbar-nav align-items-center">
+                    <div className="nav-item d-flex align-items-center">
+                      <i className="bx bx-search fs-4 lh-0"></i>
                       <input
                         type="text"
-                        class="form-control border-0 shadow-none"
+                        className="form-control border-0 shadow-none"
                         placeholder="Search..."
                         aria-label="Search..."
                       />
                     </div>
                   </div>
 
-                  <ul class="navbar-nav flex-row align-items-center ms-auto">
-                    <li class="nav-item lh-1 me-3">
+                  <ul className="navbar-nav flex-row align-items-center ms-auto">
+                    <li className="nav-item lh-1 me-3">
                       <a
-                        class="github-button"
+                        className="github-button"
                         href="https://github.com/themeselection/sneat-html-admin-template-free"
                         data-icon="octicon-star"
                         data-size="large"
@@ -115,21 +115,21 @@ export default function App({ Component, pageProps }) {
                       </a>
                     </li>
 
-                    <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                    <li className="nav-item navbar-dropdown dropdown-user dropdown">
                       <a
-                        class="nav-link dropdown-toggle hide-arrow"
-                        href="javascript:void(0);"
+                        className="nav-link dropdown-toggle hide-arrow"
+                       
                         data-bs-toggle="dropdown"
                       >
                         <div
-                          class="avatar avatar-online"
+                          className="avatar avatar-online"
                           onClick={() => handleClickprofile()}
                         >
                           <Image
                             src={require("../assets/img/avatars/1.png")}
                             width={200}
                             height={50}
-                            class="w-px-40 h-auto rounded-circle"
+                            className="w-px-40 h-auto rounded-circle"
                             alt="profile"
                           />
                         </div>
@@ -142,7 +142,7 @@ export default function App({ Component, pageProps }) {
               <main>{<Component {...pageProps} />}</main>
             </div>
           </div>
-          <div class="layout-overlay layout-menu-toggle"></div>
+          <div className="layout-overlay layout-menu-toggle"></div>
         </div>
       </Context>
     </>

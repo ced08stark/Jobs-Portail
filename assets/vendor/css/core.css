@@ -15457,6 +15457,10 @@ html:not(.layout-footer-fixed) .content-wrapper {
   right: 0;
 }
 
+#menu-side{
+  display: none;
+}
+
 @media (min-width: 1200px) {
   .layout-footer-fixed:not(.layout-menu-collapsed) .layout-wrapper:not(.layout-without-menu) .content-footer {
     left: 16.25rem;
@@ -15470,8 +15474,20 @@ html:not(.layout-footer-fixed) .content-wrapper {
     left: 0 !important;
     margin-right: 0 !important;
     margin-left: 0 !important;
-    transform: translate3d(-100%, 0, 0);
     will-change: transform, -webkit-transform;
+    transition: 1s ease-in-out;
+  }
+  #menu-side{
+  display: inline;
+  
+}
+  .translate{
+     /*transform: translate3d(-100%, 0, 0);*/
+      scale: 0;
+      transition-duration: 1s;
+      transition-property: transform;
+      transition: 1s ease-in-out;
+      
   }
   .layout-menu-expanded .layout-menu {
     transform: translate3d(0, 0, 0) !important;

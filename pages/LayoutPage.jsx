@@ -29,47 +29,47 @@ function LayoutPage({children}) {
     };
   return (
     <div>
-      <div class="layout-wrapper layout-content-navbar">
-        <div class="layout-container">
+      <div className="layout-wrapper layout-content-navbar">
+        <div className="layout-container">
           {<SideBar />}
 
-          <div class="layout-page">
+          <div className="layout-page">
             <nav
-              class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+              className="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
               id="layout-navbar"
             >
               <div
-                class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none"
+                className="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none"
                 onClick={() => console.log("toto")}
               >
                 <a
-                  class="nav-item nav-link px-0 me-xl-4"
-                  href="javascript:void(0)"
+                  className="nav-item nav-link px-0 me-xl-4"
+                  
                 >
-                  <i class="bx bx-menu bx-sm"></i>
+                  <i className="bx bx-menu bx-sm"></i>
                 </a>
               </div>
 
               <div
-                class="navbar-nav-right d-flex align-items-center"
+                className="navbar-nav-right d-flex align-items-center"
                 id="navbar-collapse"
               >
-                <div class="navbar-nav align-items-center">
-                  <div class="nav-item d-flex align-items-center">
-                    <i class="bx bx-search fs-4 lh-0"></i>
+                <div className="navbar-nav align-items-center">
+                  <div className="nav-item d-flex align-items-center">
+                    <i className="bx bx-search fs-4 lh-0"></i>
                     <input
                       type="text"
-                      class="form-control border-0 shadow-none"
+                      className="form-control border-0 shadow-none"
                       placeholder="Search..."
                       aria-label="Search..."
                     />
                   </div>
                 </div>
 
-                <ul class="navbar-nav flex-row align-items-center ms-auto">
-                  <li class="nav-item lh-1 me-3">
+                <ul className="navbar-nav flex-row align-items-center ms-auto">
+                  <li className="nav-item lh-1 me-3">
                     <a
-                      class="github-button"
+                      className="github-button"
                       href="https://github.com/themeselection/sneat-html-admin-template-free"
                       data-icon="octicon-star"
                       data-size="large"
@@ -80,21 +80,21 @@ function LayoutPage({children}) {
                     </a>
                   </li>
 
-                  <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                  <li className="nav-item navbar-dropdown dropdown-user dropdown">
                     <a
-                      class="nav-link dropdown-toggle hide-arrow"
-                      href="javascript:void(0);"
+                      className="nav-link dropdown-toggle hide-arrow"
+                     
                       data-bs-toggle="dropdown"
                     >
                       <div
-                        class="avatar avatar-online"
+                        className="avatar avatar-online"
                         onClick={() => handleClickprofile()}
                       >
                         <Image
                           src={require("../assets/img/avatars/1.png")}
                           width={200}
                           height={50}
-                          class="w-px-40 h-auto rounded-circle"
+                          className="w-px-40 h-auto rounded-circle"
                           alt="profile"
                         />
                       </div>
@@ -107,7 +107,7 @@ function LayoutPage({children}) {
             <main>{children}</main>
           </div>
         </div>
-        <div class="layout-overlay layout-menu-toggle"></div>
+        <div className="layout-overlay layout-menu-toggle"></div>
       </div>
     </div>
   );
