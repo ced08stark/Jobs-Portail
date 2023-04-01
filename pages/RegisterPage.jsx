@@ -6,15 +6,7 @@ function RegisterPage() {
   const [staff, setStaff] = useState({})
   const [employe, setEmploye] = useState({});
   const AddEmployee = async()=>{
-    await AxiosBase.post(
-      "/register/admin",
-      {
-        firstName: "Fred",
-        lastName: "Flintstone",
-      }
-    ).then((response) =>
-      console.log(response).then((error) => console.log(error))
-    );
+    
   }
   useEffect(() => {});
   return (
