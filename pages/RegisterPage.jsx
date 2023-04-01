@@ -7,7 +7,7 @@ function RegisterPage() {
   const [employe, setEmploye] = useState({});
   const AddEmployee = async()=>{
     await AxiosBase.post(
-      "register/admin",
+      "/register/admin",
       {
         firstName: "Fred",
         lastName: "Flintstone",

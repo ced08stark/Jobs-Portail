@@ -17,10 +17,15 @@ function DashboardPage() {
 
 const handleProfile = async () => {
   
-  infoUser = await AxiosBase.get(
-    `/admin/profile/${currentAdmin.id}`
-  ).catch((err) => console.log(err));
-    //console.log(infoUser.data);
+  infoUser = await axios
+    .get(`http://192.168.137.1:8000/admin/profile/${currentAdmin.id}`, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Origin: "http://localhost:3000",
+      },
+    })
+    .catch((err) => console.log(err));
+    console.log(infoUser.data);
     setCurrentAdmin({
       ...currentAdmin,
       last_name: infoUser?.data?.data?.last_name,
