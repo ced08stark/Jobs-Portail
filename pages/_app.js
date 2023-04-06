@@ -5,6 +5,7 @@ import "../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css";
 import "../assets/vendor/libs/apex-charts/apex-charts.css";
 import "../assets/vendor/fonts/boxicons.css";
 import "../assets/vendor/css/core.css";
+import "react-step-progress/dist/index.css";
 import Router from 'next/router';
 import ProgressBar from "@badrap/bar-of-progress";
 import Head from "next/head";
@@ -16,7 +17,7 @@ import ProfilOption from "../components/ProfilOption";
 import { BrowserRouter } from "react-router-dom";
 import { AdminContext } from "../context/AdminContext";
 import Context from '../context/AdminContext';
-
+import * as Icons from "@heroicons/react/24/solid"
 const progress = new ProgressBar({
   size: 4,
   color: "#6610f2",
@@ -111,7 +112,7 @@ export default function App({ Component, pageProps }) {
                         data-show-count="true"
                         aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
                       >
-                        Star
+                        <Icons.BellAlertIcon className='w-7 h-7' />
                       </a>
                     </li>
 

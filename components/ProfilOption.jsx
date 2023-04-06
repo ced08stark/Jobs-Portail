@@ -1,8 +1,12 @@
 import React from 'react'
 import Image from "next/image";
 import Link from "next/link";
+import { AdminContext } from "../context/AdminContext";
+import { useContext } from "react";
+
 
 function ProfilOption({}) {
+   const { currentAdmin, setCurrentAdmin } = useContext(AdminContext);
   return (
     <ul
       className="Regular shadow fade-out"
@@ -30,8 +34,12 @@ function ProfilOption({}) {
               </div>
             </div>
             <div className="flex-grow-1">
-              <span className="fw-semibold d-block">John Doe</span>
-              <small className="text-muted">Admin</small>
+              <span className="fw-semibold d-block">
+                {currentAdmin?.email}
+              </span>
+              <small className="text-muted">
+                {currentAdmin?.first_name}
+              </small>
             </div>
           </div>
         </Link>

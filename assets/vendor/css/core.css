@@ -14952,7 +14952,9 @@ body {
   justify-content: flex-start;
   margin: 0;
   padding: 0;
-  height: 100%;
+  width: 100%
+  
+  
 }
 
 .menu-inner-shadow {
@@ -14971,6 +14973,8 @@ html:not(.layout-menu-fixed) .menu-inner-shadow {
 .menu-item {
   align-items: flex-start;
   justify-content: flex-start;
+  width: 100%
+ 
 }
 .menu-item.menu-item-animating {
   transition: height 0.3s ease-in-out;
@@ -15071,7 +15075,7 @@ html:not(.layout-menu-fixed) .menu-inner-shadow {
 }
 .menu-vertical,
 .menu-vertical .menu-block,
-.menu-vertical .menu-inner > .menu-item,
+.menu-vertical .menu-inner > 
 .menu-vertical .menu-inner > .menu-header {
   width: 16.25rem;
 }
@@ -15476,6 +15480,7 @@ html:not(.layout-footer-fixed) .content-wrapper {
     margin-left: 0 !important;
     will-change: transform, -webkit-transform;
     transition: 1s ease-in-out;
+    width: 100%;
   }
   #menu-side{
   display: inline;

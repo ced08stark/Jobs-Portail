@@ -34,7 +34,7 @@ function AddJob() {
       onClick={handleAddProjet}
     >
       <div
-        className="flex-col space-y-3  flex rounded-md bg-white dark:bg-gray-800 w-[80%]  sm:w-1/2 h-[600px]  overflow-hidden  sm:p-0 shadow-lg shadow-black "
+        className="flex-col space-y-2  flex rounded-md bg-white dark:bg-gray-800 w-[90%]  sm:w-1/2 h-[500px]  overflow-hidden  sm:p-0 shadow-lg shadow-black "
         id="lightbox-body"
       >
         <div className="flex justify-between items-center p-4">
@@ -44,8 +44,8 @@ function AddJob() {
             onClick={() => AddProjet()}
           />
         </div>
-        <div>
-          <div className="flex-col flex p-4 space-y-2">
+        <div className="space-y-2">
+          <div className="flex-col flex px-4 space-y-2">
             <span className="font-bold text-xl">Projet name</span>
             <input
               type="text"
@@ -60,8 +60,8 @@ function AddJob() {
               placeholder="enter your projet description"
             ></textarea>
           </div>
-          <div className="flex space-x-2 justify-end items-center p-4">
-            <span>Montant</span>
+          <div className="flex space-x-2 justify-end items-center px-4">
+            <span className="text-sm sm:text-base">Montant</span>
             <input
               onChange={(e) =>
                 setProjet({ ...projet, montant: e.target.value })
@@ -70,10 +70,10 @@ function AddJob() {
               placeholder="$"
               step={5}
               min={0}
-              className="p-2 border-none outline-1 border outline-indigo-500 rounded-md"
+              className="p-2 border-none outline-1 border outline-indigo-500 rounded-md sm:p-1"
             />
           </div>
-          <div className="flex items-center justify-end p-4 space-x-3 mt-6">
+          <div className="flex items-center justify-end p-4 space-x-3">
             <button
               onClick={() => AddProjet()}
               className="px-10 text-xs sm:text-base py-2 rounded-md hover:bg-gray-300/50 font-semibold"

@@ -10,36 +10,37 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { AxiosBase } from './api/AxiosBase'
 
-let infoUser = {};
+//let infoUser = {};
 function DashboardPage() {
     const { currentAdmin, setCurrentAdmin } = useContext(AdminContext);
     const route = useRouter()
 
 const handleProfile = async () => {
-  
-  infoUser = await axios
-    .get(`http://192.168.137.1:8000/admin/profile/${currentAdmin.id}`, {
+   //console.log(currentAdmin);
+  const data = await axios
+    .get(`http://127.0.0.1:8000/admin/profile`,{params: {user_id : currentAdmin?.id}}, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         Origin: "http://localhost:3000",
       },
     })
     .catch((err) => console.log(err));
-    console.log(infoUser.data);
+   console.log(data);
     setCurrentAdmin({
       ...currentAdmin,
-      last_name: infoUser?.data?.data?.last_name,
+      last_name: data?.data?.data?.last_name,
+      first_name: data?.data?.data?.first_name,
     });
  // console.log(infoUser.data.data.last_name);
 
   //setCurrentAdmin({ ...currentAdmin, currentAdmin: infoUser.data.data});
 };
     useEffect(() => {
-     // handleProfile();
+      handleProfile();
     }, []);
 
 if (currentAdmin.id != 0) {
-  handleProfile();
+  //handleProfile();
 } else {
   //route.push("/LoginPage");
 }
@@ -69,19 +70,14 @@ if (currentAdmin.id != 0) {
                   <div className="col-sm-7">
                     <div className="card-body">
                       <h5 className="card-title text-primary">
-                        Congratulations{" "}
-                        {`${currentAdmin?.last_name}`}{" "}
-                        ! 🎉
+                        Congratulations {`${currentAdmin?.last_name}`} ! 🎉
                       </h5>
                       <p className="mb-4">
                         You have done <span className="fw-bold">72%</span> more
                         sales today. Check your new badge in your profile.
                       </p>
 
-                      <a
-                       
-                        className="btn btn-sm btn-outline-primary"
-                      >
+                      <a className="btn-sm cursor-pointer  text-white bg-indigo-500 hover:bg-indigo-700 ">
                         View Badges
                       </a>
                     </div>
@@ -129,12 +125,8 @@ if (currentAdmin.id != 0) {
                             className="dropdown-menu dropdown-menu-end"
                             aria-labelledby="cardOpt3"
                           >
-                            <a className="dropdown-item" >
-                              View More
-                            </a>
-                            <a className="dropdown-item" >
-                              Delete
-                            </a>
+                            <a className="dropdown-item">View More</a>
+                            <a className="dropdown-item">Delete</a>
                           </div>
                         </div>
                       </div>
@@ -174,12 +166,8 @@ if (currentAdmin.id != 0) {
                             className="dropdown-menu dropdown-menu-end"
                             aria-labelledby="cardOpt6"
                           >
-                            <a className="dropdown-item" >
-                              View More
-                            </a>
-                            <a className="dropdown-item" >
-                              Delete
-                            </a>
+                            <a className="dropdown-item">View More</a>
+                            <a className="dropdown-item">Delete</a>
                           </div>
                         </div>
                       </div>
@@ -219,15 +207,9 @@ if (currentAdmin.id != 0) {
                             className="dropdown-menu dropdown-menu-end"
                             aria-labelledby="growthReportId"
                           >
-                            <a className="dropdown-item" >
-                              2021
-                            </a>
-                            <a className="dropdown-item" >
-                              2020
-                            </a>
-                            <a className="dropdown-item" >
-                              2019
-                            </a>
+                            <a className="dropdown-item">2021</a>
+                            <a className="dropdown-item">2020</a>
+                            <a className="dropdown-item">2019</a>
                           </div>
                         </div>
                       </div>
@@ -266,7 +248,7 @@ if (currentAdmin.id != 0) {
               </div>
             </div>
 
-            <div className="col-12 col-md-8 col-lg-4 order-3 order-md-2">
+            <div className="col-12 col-md-8 col-lg-4 order-3 order-md-2 mt-4">
               <div className="row">
                 <div className="col-6 mb-4">
                   <div className="card">
@@ -296,12 +278,8 @@ if (currentAdmin.id != 0) {
                             className="dropdown-menu dropdown-menu-end"
                             aria-labelledby="cardOpt4"
                           >
-                            <a className="dropdown-item" >
-                              View More
-                            </a>
-                            <a className="dropdown-item" >
-                              Delete
-                            </a>
+                            <a className="dropdown-item">View More</a>
+                            <a className="dropdown-item">Delete</a>
                           </div>
                         </div>
                       </div>
@@ -337,17 +315,18 @@ if (currentAdmin.id != 0) {
                           >
                             <i className="bx bx-dots-vertical-rounded"></i>
                           </button>
-                          <div className="dropdown-menu" aria-labelledby="cardOpt1">
-                            <a className="dropdown-item" >
-                              View More
-                            </a>
-                            <a className="dropdown-item" >
-                              Delete
-                            </a>
+                          <div
+                            className="dropdown-menu"
+                            aria-labelledby="cardOpt1"
+                          >
+                            <a className="dropdown-item">View More</a>
+                            <a className="dropdown-item">Delete</a>
                           </div>
                         </div>
                       </div>
-                      <span className="fw-semibold d-block mb-1">Transactions</span>
+                      <span className="fw-semibold d-block mb-1">
+                        Transactions
+                      </span>
                       <h3 className="card-title mb-2">$14,857</h3>
                       <small className="text-success fw-semibold">
                         <i className="bx bx-up-arrow-alt"></i> +28.14%

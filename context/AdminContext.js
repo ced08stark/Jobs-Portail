@@ -7,13 +7,13 @@ export const AdminContext = createContext(null)
 
 function Context({children}){
     const [currentAdmin, setCurrentAdmin] = useState({
-        id: 6,
-        first_name: "tony",
-        last_name: "stark",
-        address: "r",
-        email: "r",
-        password: "r",
-        picture: "r",
+      id: 0,
+      first_name: "",
+      last_name: "",
+      address: "",
+      email: "",
+      password: "",
+      picture: "",
     });
 
     return (

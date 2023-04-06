@@ -26,7 +26,7 @@ function JobsPage() {
       
         <div className="layout-page">
           <div className="content-wrapper">
-            <div className="my-10 mx-10">
+            <div className="my-10 mx-4">
               <div className="w-full h-12 bg-white rounded-md">
                 <div className="flex px-4 pt-1 space-x-5">
                   <Link
@@ -40,11 +40,11 @@ function JobsPage() {
                   </Link>
                 </div>
                 <div className="w-full bg-white h-[450px] mt-4 p-3   overflow-hidden">
-                  <button onClick={()=>AddProjet()} className="my-1 py-1 rounded-md bg-indigo-500 text-white flex items-center w-[120px] justify-center">
+                  <button onClick={()=>AddProjet()} className="my-1 py-1 px-2 rounded-md bg-indigo-500 text-white flex items-center justify-center">
                     <i className={`bx bx-plus`}></i>
                     <span className="text-white font-bold"> Add projets</span>
                   </button>
-                  <div className="py-3 flex flex-wrap overflow-scroll scrollbar scrollbar-thumb-indigo-200 scrollbar-rounded-* scrollbar-track-gray-100 h-[400px] bg-scroll">
+                  <div className="py-3 flex flex-wrap overflow-scroll scrollbar-thin scrollbar-thumb-indigo-200 scrollbar-rounded-* scrollbar-track-gray-100 h-[400px] w-full">
                     <JobComponent
                       key={1}
                       title="Content projet"

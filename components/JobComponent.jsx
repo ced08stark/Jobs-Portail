@@ -7,7 +7,6 @@ function JobComponent({ title, description, author, authorProfile }) {
         <div className="w-[30px] h-[30px] rounded-full bg-slate-500 flex items-center justify-center">
           <i className={`bx bx-user text-white`}></i>
         </div>
-
         <span className="font-bold text-center w-full">{title}</span>
       </div>
       <div className="text-gray-500">{description}</div>
