@@ -1,5 +1,5 @@
 import React from 'react'
-import { WrenchIcon, EyeIcon, PencilIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
+import { WrenchIcon, EyeIcon, PencilIcon, ArrowLeftIcon, BuildingLibraryIcon } from "@heroicons/react/24/outline";
 import { useRouter } from 'next/router';
 
 
@@ -22,50 +22,46 @@ function RolesPage() {
   return (
     <div className="flex w-full h-screen justify-center items-center space-y-12 flex-col">
       <span className="font-extrabold text-3xl"></span>
-      <span className="text-3xl font-bold text-black">Select user type</span>
-      <div className="bg-gray-200/40 w-[60%] rounded-lg">
-        <div className="block lg:flex  items-center justify-between p-3">
-          <div
-            id="1"
-            className="flex-col p-2 w-[200px] h-[200px] flex items-center justify-center shadow-xl space-y-3 rounded-lg bg-white text-blue-500 cursor-pointer"
-            onClick={() => handleClick(1)}
-          >
-            <WrenchIcon className="h-12 w-12 " />
-            <span className="">Admin</span>
-          </div>
+      <span className="text-xl lg:text-3xl font-bold text-black ">Select user type</span>
+      <div className="m-10 lg:m-auto  bg-gray-200/40 rounded-lg flex flex-col">
+        <div className=" flex  items-center justify-around lg:justify-between p-3">
           <div
             id="2"
             onClick={() => handleClick(2)}
-            className="flex-col p-2 w-[200px] h-[200px] flex items-center justify-center shadow-xl space-y-3 rounded-lg bg-white text-blue-500 cursor-pointer"
+            className="flex-col p-2 w-[100px] h-[100px] lg:w-[200px] lg:h-[200px] flex items-center justify-center shadow-xl space-y-3 rounded-lg bg-white text-blue-500 cursor-pointer active"
           >
-            <EyeIcon className="h-12 w-12" />
-            <span className="">Employer</span>
+            <BuildingLibraryIcon className="h-8 w-8 lg:h-12 lg:w-12" />
+            <span className="text-xs lg:text-base text-center">
+              Employer or organisation
+            </span>
           </div>
           <div
             id="3"
             onClick={() => handleClick(3)}
-            className="flex-col p-2 w-[200px] h-[200px] flex items-center justify-center shadow-xl space-y-3 rounded-lg bg-indigo-500 text-white cursor-pointer"
+            className="flex-col p-2 w-[100px] h-[100px] lg:w-[200px] lg:h-[200px] flex items-center justify-center shadow-xl space-y-3 rounded-lg bg-indigo-500 text-white cursor-pointer"
           >
-            <PencilIcon className="h-12 w-12 " />
-            <span className="">Staff</span>
+            <PencilIcon className="h-8 w-8 lg:h-12 lg:w-12" />
+            <span className="text-xs lg:text-base text-center">
+              Staff Consultant
+            </span>
           </div>
         </div>
         <div>
-          <p className="p-3">
+          <p className="p-3 text-sm lg:text-base text-center">
             you would have a permission but you can{"'"}t edit or make change
           </p>
         </div>
       </div>
       <div className="space-x-5 flex">
         <button
-          className="px-12 rounded-full py-2 text-blue-500 flex space-x-4"
+          className="px-12 rounded-full py-2 text-blue-500 flex space-x-4 text-xs lg:text-base"
           onClick={() => router.back()}
         >
-          <ArrowLeftIcon className="h-6 w-6 " />
+          <ArrowLeftIcon className="h-4 w-4 lg:h-6 lg:w-6 " />
           <span>back</span>
         </button>
         <button
-          className="px-24 rounded-full py-2 bg-blue-500 text-white"
+          className="px-10 lg:px-24 rounded-full py-2 bg-blue-500 text-white text-xs lg:text-base"
           onClick={() => router.push("/RegisterEmployer")}
         >
           continue

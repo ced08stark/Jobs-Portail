@@ -218,9 +218,9 @@ function RegisterEmployer() {
       </div>
     </div>*/
 
-    <div class="h-auto flex space-y-2 flex-col mt-6 mx-10 lg:mx-32 justify-center">
+    <div class="h-auto flex space-y-2 flex-col mt-8 lg:mx-32 justify-center">
       <div className="">
-        <div className="card mb-4">
+        <div className="card mb-2">
           <div className="card-body">
             <form>
               <div className="row mb-3">

@@ -59,8 +59,8 @@ function RegisterEmployer() {
 
   useEffect(() => {});
   return (
-    <div className="h-screen flex space-y-2 flex-col items-center justify-center my-24 lg:m-auto ">
-      <div className="w-[80%]">
+    <div className="h-screen flex space-y-2 flex-col items-center justify-center my-12 lg:m-auto ">
+      <div className="w-[100%] lg:w-[80%]">
         <div className="">
           <div className="card">
             <div className="card-body">
@@ -75,7 +75,9 @@ function RegisterEmployer() {
               <h4 className="mb-2 py-2 text-center">
                 Adventure starts here for administrator 🚀
               </h4>
-              <p className="mb-2 text-center">Make your app management easy and fun!</p>
+              <p className="mb-2 text-center">
+                Make your app management easy and fun!
+              </p>
               <div className="flex justify-center items-center">
                 <div className="flex items-center justify-center w-[100px] h-[100px]  lg:w-[150px] lg:h-[150px] border-dotted rounded-full cursor-pointer border-2 border-indigo-500">
                   <UserIcon className="w-[50px] h-[50px] lg:w-[100px] lg:h-[100px] text-indigo-500" />
@@ -97,44 +99,6 @@ function RegisterEmployer() {
                     />
                   </div>
                   <div className="mb-3 mx-3">
-                    <label className="form-label">Email</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="email"
-                      name="email"
-                      placeholder="Enter your email"
-                      onChange={(e) =>
-                        setAdmin({ ...admin, email: e.target.value })
-                      }
-                    />
-                  </div>
-
-                  <div className="mb-3 mx-3">
-                    <div className="form-check">
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        id="terms-conditions"
-                        name="terms"
-                      />
-                      <label
-                        className="form-check-label"
-                        for="terms-conditions"
-                      >
-                        I agree to
-                        <a>privacy policy & terms</a>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <form
-                  id="formAuthentication"
-                  className="w-full"
-                  action="index.html"
-                  method="POST"
-                >
-                  <div className="mb-3 mx-3">
                     <label className="form-label">Last name</label>
                     <input
                       type="text"
@@ -144,6 +108,21 @@ function RegisterEmployer() {
                       placeholder="Enter your lastname"
                       onChange={(e) =>
                         setAdmin({ ...admin, last_name: e.target.value })
+                      }
+                    />
+                  </div>
+                </div>
+                <div id="formAuthentication" className="w-full">
+                  <div className="mb-3 mx-3">
+                    <label className="form-label">Email</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="email"
+                      name="email"
+                      placeholder="Enter your email"
+                      onChange={(e) =>
+                        setAdmin({ ...admin, email: e.target.value })
                       }
                     />
                   </div>
@@ -166,7 +145,24 @@ function RegisterEmployer() {
                       </span>
                     </div>
                   </div>
-                </form>
+                  <div className="mb-3 mx-3">
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id="terms-conditions"
+                        name="terms"
+                      />
+                      <label
+                        className="form-check-label"
+                        for="terms-conditions"
+                      >
+                        I agree to
+                        <a>privacy policy & terms</a>
+                      </label>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div>
                 {showMessage && (

@@ -44,12 +44,12 @@ function RegisterEmployer() {
         onSubmit={onFormSubmit}
         steps={[
           {
-            label: "Step 1",
-            name: "step 1",
+            label: "Infomation personnel",
+            name: "step 3",
             content: step1Content,
           },
           {
-            label: "Step 2",
+            label: "Company information",
             name: "step 2",
             content: step2Content,
             validator: step2Validator,
