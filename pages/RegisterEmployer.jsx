@@ -7,24 +7,40 @@ import Link from "next/link";
 import AlertComponent from "../components/AlertComponent";
 import { ArrowRightIcon } from "@heroicons/react/24/outline"
 import StepProgressBar from "react-step-progress";
+import ModalLoadComponent from "../components/ModalLoadComponent";
 
 import RegisterEmployerPage1 from "./RegisterEmployerPage1"
 import RegisterEmployerPage2 from "./RegisterEmployerPage2";
+import RegisterEmployerPage3 from "./RegisterEmployerPage3";
 
 function RegisterEmployer() {
-  const step1Content = <RegisterEmployerPage1 />;
+  const [regiterValide, setRegisterValide] = useState(false)
+  const step1Content = <RegisterEmployerPage1 setRegisterValide={setRegisterValide} />;
   const step2Content = <RegisterEmployerPage2 />;
-  const step3Content = <h1>Step 3 Content</h1>;
+  const step3Content = <RegisterEmployerPage3 />;
+  const { currentAdmin } = useContext(AdminContext);
+  const router = useRouter();
 
   function step2Validator() {
     // return a boolean
   }
-
+  //console.log(currentAdmin?.first_name);
   function step3Validator() {
-    // return a boolean
+     if (currentAdmin.first_name == "r" || currentAdmin.last_name == "r") {
+       return false;
+     } else {
+       return true;
+     }
+     //alert(regiterValide)
+     
   }
 
   function onFormSubmit() {
+    setRegisterValide(true)
+    setTimeout(() =>{
+      setRegisterValide(false)
+      router.push('/DashboardPage')
+    }, 4000)
     // handle the submit logic here
     // This function will be executed at the last step
     // when the submit button (next button in the previous steps) is pressed
@@ -34,29 +50,38 @@ function RegisterEmployer() {
    
   });
   return (
-    <div className="">
+    <div className="bg-white">
+      {regiterValide && <ModalLoadComponent />}
       <StepProgressBar
         startingStep={0}
         previousBtnName="preview"
         nextBtnName="next"
         contentClass="m-auto"
-        primaryBtnClass="text-white px-10 py-1 rounded-full btn"
+        labelClass="progresslabel"
+        primaryBtnClass="text-white px-22  rounded-full progressbg"
         onSubmit={onFormSubmit}
         steps={[
           {
-            label: "Infomation personnel",
-            name: "step 3",
+            label: "Personal infomation",
+            name: "step 1",
             content: step1Content,
+            // validator: step3Validator,
           },
           {
             label: "Company information",
             name: "step 2",
             content: step2Content,
-            validator: step2Validator,
+            // validator: step2Validator,
           },
           {
-            label: "Step 3",
+            label: "Company location",
             name: "step 3",
+            content: step3Content,
+            // validator: step3Validator,
+          },
+          {
+            label: "Jobs information",
+            name: "step 4",
             content: step3Content,
             validator: step3Validator,
           },

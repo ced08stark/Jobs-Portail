@@ -34,11 +34,13 @@ export default function App({ Component, pageProps }) {
  
   const [currentAdmin, setCurrentAdmin] = useState("");
   const handleClickprofile = () => {
-    if (showProfile) {
-      setShowProfile(false);
-    } else {
+    let profileMenu = document.querySelector('#profileMenu')
+   
       setShowProfile(true);
-    }
+      profileMenu.classList.remove("scale-0");
+      profileMenu.classList.add("scale-100");
+      
+    
   };
 
   const handleClickMenu = () => {
@@ -136,7 +138,7 @@ export default function App({ Component, pageProps }) {
                         </div>
                       </a>
                     </li>
-                    {showProfile ? <ProfilOption /> : <></>}
+                    {<ProfilOption /> }
                   </ul>
                 </div>
               </nav>

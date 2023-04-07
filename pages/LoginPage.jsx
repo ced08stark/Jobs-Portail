@@ -60,12 +60,12 @@ export default function LoginPage() {
    
  
   return (
-    <div className="h-screen flex flex-col items-center justify-center">
-      <div className="m-auto w-[300px] lg:w-1/3">
+    <div className="h-screen flex flex-col items-center lg:bg-none justify-center">
+      <div className="w-full m-auto sm:1/2  md:w-2/3 lg:w-1/3">
         <div className="authentication-wrapper authentication-basic container-p-y ">
-          <div className="authentication-inner">
-            <div className="card">
-              <div className="card-body">
+          <div className="authentication-inner ">
+            <div className="card  h-screen  md:h-auto">
+              <div className="card-body  lg:space-y-0 space-y-6">
                 <div className="app-brand justify-content-center">
                   <a href="index.html" className="app-brand-link gap-2">
                     <span className="app-brand-logo demo"></span>

@@ -5,11 +5,17 @@ import { AdminContext } from "../context/AdminContext";
 import { useContext } from "react";
 
 
-function ProfilOption({}) {
+function ProfilOption() {
    const { currentAdmin, setCurrentAdmin } = useContext(AdminContext);
+   const handleClick = () =>{
+    let profileMenu = document.querySelector("#profileMenu");
+    profileMenu.classList.remove("scale-100");
+    profileMenu.classList.add("scale-0");
+   }
   return (
     <ul
-      className="Regular shadow fade-out"
+      className="Regular shadow fade-out scale-0"
+      id="profileMenu"
       style={{
         marginTop: "330px",
         backgroundColor: "white",
@@ -18,6 +24,7 @@ function ProfilOption({}) {
         listStyle: "none",
         borderRadius: "10px",
       }}
+      onClick={() => handleClick()}
     >
       <li>
         <Link className="dropdown-item" href="#">
@@ -34,12 +41,8 @@ function ProfilOption({}) {
               </div>
             </div>
             <div className="flex-grow-1">
-              <span className="fw-semibold d-block">
-                {currentAdmin?.email}
-              </span>
-              <small className="text-muted">
-                {currentAdmin?.first_name}
-              </small>
+              <span className="fw-semibold d-block">{currentAdmin?.email}</span>
+              <small className="text-muted">{currentAdmin?.first_name}</small>
             </div>
           </div>
         </Link>

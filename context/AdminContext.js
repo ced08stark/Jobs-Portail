@@ -8,8 +8,8 @@ export const AdminContext = createContext(null)
 function Context({children}){
     const [currentAdmin, setCurrentAdmin] = useState({
       id: 0,
-      first_name: "",
-      last_name: "",
+      first_name: "r",
+      last_name: "r",
       address: "",
       email: "",
       password: "",

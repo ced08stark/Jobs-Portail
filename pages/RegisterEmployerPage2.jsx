@@ -5,7 +5,8 @@ import { useContext } from "react";
 import { AdminContext } from "../context/AdminContext";
 import Link from "next/link";
 import AlertComponent from "../components/AlertComponent";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import { ArrowRightIcon, PhotoIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 function RegisterEmployer() {
   const { setCurrentAdmin } = useContext(AdminContext);
@@ -218,43 +219,32 @@ function RegisterEmployer() {
       </div>
     </div>*/
 
-    <div class="h-auto flex space-y-2 flex-col mt-8 lg:mx-32 justify-center">
+    <div class="h-auto flex space-y-2 flex-col mt-8 lg:mx-32 justify-center pt-4">
       <div className="">
-        <div className="card mb-2">
-          <div className="card-body">
+        <div className="">
+          <div className="">
             <form>
-              <div className="row mb-3">
+              <div className="row mb-3 items-center">
                 <label
                   className="col-sm-2 col-form-label"
-                  for="basic-icon-default-fullname"
+                  htmlFor="basic-icon-default-company"
                 >
-                  Name
+                  Company Logo
                 </label>
-                <div className="col-sm-10">
-                  <div className="input-group input-group-merge">
-                    <span
-                      id="basic-icon-default-fullname2"
-                      className="input-group-text"
-                    >
-                      <i className="bx bx-user"></i>
-                    </span>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="basic-icon-default-fullname"
-                      placeholder="John Doe"
-                      aria-label="John Doe"
-                      aria-describedby="basic-icon-default-fullname2"
-                    />
-                  </div>
+                <div className="relative col-sm-10 flex items-center justify-center border-dotted border-2  border-indigo-500">
+                  <PhotoIcon className="w-[100px] h-[100px] text-indigo-500" />
+                  <input
+                    type="file"
+                    className="absolute w-full h-full cursor-pointer opacity-0"
+                  />
                 </div>
               </div>
               <div className="row mb-3">
                 <label
                   className="col-sm-2 col-form-label"
-                  for="basic-icon-default-company"
+                  htmlFor="basic-icon-default-company"
                 >
-                  Company
+                  Company Name
                 </label>
                 <div className="col-sm-10">
                   <div className="input-group input-group-merge">
@@ -278,39 +268,34 @@ function RegisterEmployer() {
               <div className="row mb-3">
                 <label
                   className="col-sm-2 col-form-label"
-                  for="basic-icon-default-email"
+                  htmlFor="basic-icon-default-fullname"
                 >
-                  Email
+                  Company website
                 </label>
                 <div className="col-sm-10">
                   <div className="input-group input-group-merge">
-                    <span className="input-group-text">
-                      <i className="bx bx-envelope"></i>
+                    <span
+                      id="basic-icon-default-fullname2"
+                      className="input-group-text"
+                    >
+                      <i className="bx bx-user"></i>
                     </span>
                     <input
                       type="text"
-                      id="basic-icon-default-email"
                       className="form-control"
-                      placeholder="john.doe"
-                      aria-label="john.doe"
-                      aria-describedby="basic-icon-default-email2"
+                      id="basic-icon-default-fullname"
+                      placeholder="John Doe"
+                      aria-label="John Doe"
+                      aria-describedby="basic-icon-default-fullname2"
                     />
-                    <span
-                      id="basic-icon-default-email2"
-                      className="input-group-text"
-                    >
-                      @example.com
-                    </span>
-                  </div>
-                  <div className="form-text">
-                    You can use letters, numbers & periods
                   </div>
                 </div>
               </div>
+             
               <div className="row mb-3">
                 <label
                   className="col-sm-2 form-label"
-                  for="basic-icon-default-phone"
+                  htmlFor="basic-icon-default-phone"
                 >
                   Phone No
                 </label>
@@ -335,30 +320,28 @@ function RegisterEmployer() {
               </div>
               <div className="row mb-3">
                 <label
-                  className="col-sm-2 form-label"
-                  for="basic-icon-default-message"
+                  className="col-sm-2 col-form-label"
+                  htmlFor="basic-icon-default-email"
                 >
-                  Message
+                  Company size
                 </label>
                 <div className="col-sm-10">
                   <div className="input-group input-group-merge">
-                    <span
-                      id="basic-icon-default-message2"
-                      className="input-group-text"
-                    >
-                      <i className="bx bx-comment"></i>
+                    <span className="input-group-text">
+                      <i className="bx bx-group"></i>
                     </span>
-                    <textarea
-                      id="basic-icon-default-message"
+                    <input
+                      type="number"
+                      min={1}
+                      id="basic-icon-default"
                       className="form-control"
-                      placeholder="Hi, Do you have a moment to talk Joe?"
-                      aria-label="Hi, Do you have a moment to talk Joe?"
-                      aria-describedby="basic-icon-default-message2"
-                    ></textarea>
+                      placeholder="ex. 10"
+                      aria-label="john.doe"
+                      aria-describedby="basic-icon-default-email2"
+                    />
                   </div>
                 </div>
               </div>
-             
             </form>
           </div>
         </div>

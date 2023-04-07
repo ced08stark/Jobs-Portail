@@ -3,3 +3,16 @@
 @tailwind utilities;
 
 
+@layer components {
+  .progresslabel {
+    @apply text-xs sm:text-xs lg:text-base;
+  }
+
+  .progressbg{
+    @apply bg-indigo-700;
+  }
+
+  .hide{
+    @apply hidden;
+  }
+}
