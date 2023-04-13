@@ -5,57 +5,38 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import ProfilOption from "../components/ProfilOption";
 import { useContext } from "react";
-import { AdminContext } from "../context/AdminContext";
+import { UserContext } from "../context/UserContext";
 import { useRouter } from "next/router";
+import FooterComponent from "../components/FooterComponent"
 import axios from "axios";
-import { AxiosBase } from './api/AxiosBase'
+import { useSelector, useDispatch } from "react-redux";
+import { setToken } from "../features/token";
+import GetCookies from "../hooks/getCookies";
+
 
 //let infoUser = {};
 function DashboardPage() {
-    const { currentAdmin, setCurrentAdmin } = useContext(AdminContext);
+    const { currentUser, setCurrentUser } = useContext(UserContext);
+    let user = GetCookies("currentUser")
+    //alert(currentUser?.employerID);
     const route = useRouter()
-
-const handleProfile = async () => {
-   //console.log(currentAdmin);
-  const data = await axios
-    .get(`http://127.0.0.1:8000/admin/profile`,{params: {user_id : currentAdmin?.id}}, {
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Origin: "http://localhost:3000",
-      },
-    })
-    .catch((err) => console.log(err));
-   console.log(data);
-    setCurrentAdmin({
-      ...currentAdmin,
-      last_name: data?.data?.data?.last_name,
-      first_name: data?.data?.data?.first_name,
+    const token = useSelector(setToken)
+      //alert(currentUser?.employerID)
+     useEffect(() => {
+      if (currentUser?.id == null) {
+        //setCurrentUser(JSON.parse(user));
+      }
+      
     });
- // console.log(infoUser.data.data.last_name);
+    
 
-  //setCurrentAdmin({ ...currentAdmin, currentAdmin: infoUser.data.data});
-};
-    useEffect(() => {
-      handleProfile();
-    }, []);
+     
 
-if (currentAdmin.id != 0) {
-  //handleProfile();
-} else {
-  //route.push("/LoginPage");
-}
-
-    useEffect(()=>{
-        localStorage.setItem('user', JSON.stringify(currentAdmin))
-    }, [currentAdmin]);
-
-
-    useEffect(()=>{
-        const admin = JSON.parse(localStorage.getItem('user'));
-        if (!currentAdmin){
-            setCurrentAdmin((prev) => ({ ...prev, ...admin }));
-        }
-    });
+    
+        
+        
+        
+    
   
     
    
@@ -70,7 +51,7 @@ if (currentAdmin.id != 0) {
                   <div className="col-sm-7">
                     <div className="card-body">
                       <h5 className="card-title text-primary">
-                        Congratulations {`${currentAdmin?.last_name}`} ! 🎉
+                        Congratulations {`${currentUser?.last_name}`} ! 🎉
                       </h5>
                       <p className="mb-4">
                         You have done <span className="fw-bold">72%</span> more
@@ -85,7 +66,7 @@ if (currentAdmin.id != 0) {
                   <div className="col-sm-5 text-center text-sm-left">
                     <div className="card-body pb-0 px-0 px-md-4">
                       <Image
-                        src={require("../assets/img/illustrations/man-with-laptop-light.png")}
+                        src={require("../assets/img/illustrations/girl-doing-yoga-light.png")}
                         width={200}
                         height={140}
                         alt="View Badge User"
@@ -131,9 +112,9 @@ if (currentAdmin.id != 0) {
                         </div>
                       </div>
                       <span className="fw-semibold d-block mb-1">Profit</span>
-                      <h3 className="card-title mb-2">$12,628</h3>
+                      <h3 className="card-title mb-2">$0</h3>
                       <small className="text-success fw-semibold">
-                        <i className="bx bx-up-arrow-alt"></i> +72.80%
+                        <i className="bx bx-up-arrow-alt"></i> +0.1%
                       </small>
                     </div>
                   </div>
@@ -172,9 +153,9 @@ if (currentAdmin.id != 0) {
                         </div>
                       </div>
                       <span>Sales</span>
-                      <h3 className="card-title text-nowrap mb-1">$4,679</h3>
+                      <h3 className="card-title text-nowrap mb-1">$0</h3>
                       <small className="text-success fw-semibold">
-                        <i className="bx bx-up-arrow-alt"></i> +28.42%
+                        <i className="bx bx-up-arrow-alt"></i> +1.42%
                       </small>
                     </div>
                   </div>
@@ -338,56 +319,8 @@ if (currentAdmin.id != 0) {
             </div>
           </div>
         </div>
-
-        <footer className="content-footer footer bg-footer-theme">
-          <div className="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-            <div className="mb-2 mb-md-0">
-              © 2023 , made with WIB-COMPANY by
-              <a
-                href="https://themeselection.com"
-                target="_blank"
-                className="footer-link fw-bolder"
-              >
-                ThemeSelection
-              </a>
-            </div>
-            <div>
-              <a
-                href="https://themeselection.com/license/"
-                className="footer-link me-4"
-                target="_blank"
-              >
-                License
-              </a>
-              <a
-                href="https://themeselection.com/"
-                target="_blank"
-                className="footer-link me-4"
-              >
-                More Themes
-              </a>
-
-              <a
-                href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                target="_blank"
-                className="footer-link me-4"
-              >
-                Documentation
-              </a>
-
-              <a
-                href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                target="_blank"
-                className="footer-link me-4"
-              >
-                Support
-              </a>
-            </div>
-          </div>
-        </footer>
-
-        <div className="content-backdrop fade"></div>
       </div>
+      <FooterComponent />
     </div>
   );
 }

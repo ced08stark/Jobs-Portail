@@ -2,13 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useContext } from "react";
-import { AdminContext } from "../context/AdminContext";
+import { UserContext } from "../context/UserContext";
 import Link from "next/link";
 import AlertComponent from "../components/AlertComponent";
 import { ArrowRightIcon, UserCircleIcon, UserIcon } from "@heroicons/react/24/outline";
 
-function RegisterEmployer({registerValide, setRegisterValide}) {
-  const { currentAdmin, setCurrentAdmin } = useContext(AdminContext);
+function RegisterEmployer() {
+  const { currentUser, setCurrentUser } = useContext(UserContext);
   const router = useRouter();
   
 
@@ -78,8 +78,8 @@ function RegisterEmployer({registerValide, setRegisterValide}) {
                 </div>
               </div>
               <div className="block sm:flex items-center">
-                <div id="formAuthentication" className="w-full">
-                  <div className="mb-3 mx-3">
+                <div id="formAuthentication" className="w-full mr-0 lg:mr-10">
+                  <div className="mb-3">
                     <label className="form-label">First Name</label>
                     <div className="input-group input-group-merge">
                       <span className="input-group-text">
@@ -92,15 +92,15 @@ function RegisterEmployer({registerValide, setRegisterValide}) {
                         name="username"
                         placeholder="Enter your firstname"
                         onChange={(e) =>
-                          setCurrentAdmin({
-                            ...currentAdmin,
+                          setCurrentUser({
+                            ...currentUser,
                             first_name: e.target.value,
                           })
                         }
                       />
                     </div>
                   </div>
-                  <div className="mb-3 mx-3">
+                  <div className="mb-3">
                     <label className="form-label">Last name</label>
                     <div className="input-group input-group-merge">
                       <span className="input-group-text">
@@ -113,8 +113,8 @@ function RegisterEmployer({registerValide, setRegisterValide}) {
                         name="username"
                         placeholder="Enter your lastname"
                         onChange={(e) =>
-                          setCurrentAdmin({
-                            ...currentAdmin,
+                          setCurrentUser({
+                            ...currentUser,
                             last_name: e.target.value,
                           })
                         }
@@ -123,7 +123,7 @@ function RegisterEmployer({registerValide, setRegisterValide}) {
                   </div>
                 </div>
                 <div id="formAuthentication" className="w-full">
-                  <div className="mb-3 mx-3">
+                  <div className="mb-3">
                     <label className="col-sm-2 col-form-label">Email</label>
 
                     <div className="">
@@ -139,8 +139,8 @@ function RegisterEmployer({registerValide, setRegisterValide}) {
                           aria-label="john.doe"
                           aria-describedby="basic-icon-default-email2"
                           onChange={(e) =>
-                            setCurrentAdmin({
-                              ...currentAdmin,
+                            setCurrentUser({
+                              ...currentUser,
                               email: e.target.value,
                             })
                           }
@@ -148,7 +148,7 @@ function RegisterEmployer({registerValide, setRegisterValide}) {
                       </div>
                     </div>
                   </div>
-                  <div className="mb-3 mx-3">
+                  <div className="mb-3 mx-0 md:mx-3">
                     <label className="form-label">Password</label>
                     <div className="">
                       <div className="input-group input-group-merge">
@@ -163,8 +163,8 @@ function RegisterEmployer({registerValide, setRegisterValide}) {
                           placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                           aria-describedby="password"
                           onChange={(e) =>
-                            setCurrentAdmin({
-                              ...currentAdmin,
+                            setCurrentUser({
+                              ...currentUser,
                               password: e.target.value,
                             })
                           }
@@ -177,13 +177,14 @@ function RegisterEmployer({registerValide, setRegisterValide}) {
                   </div>
                 </div>
               </div>
-              <div className="mb-3 mx-3">
+              <div className="mb-3 mx-0 md:mx-3">
                 <div className="form-check">
                   <input
                     className="form-check-input"
                     type="checkbox"
                     id="terms-conditions"
                     name="terms"
+                    readOnly
                   />
                   <label className="form-check-label">
                     I agree to

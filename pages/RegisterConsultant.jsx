@@ -4,8 +4,12 @@ import SideBar from "../components/SideBar";
 import * as Icons from "@heroicons/react/24/solid";
 import ProfilOption from "../components/ProfilOption";
 import Link from 'next/link';
+import FooterComponent from '../components/FooterComponent';
+import { useSelector, useDispatch } from "react-redux";
+import { setToken } from "../features/token";
 
 function RegisterConsultant() {
+  
   return (
     <div>
       <div className="layout-container">
@@ -70,7 +74,7 @@ function RegisterConsultant() {
                   onClick={() => handleClickprofile()}
                 >
                   <Image
-                    src={require("../assets/img/avatars/1.png")}
+                    src={require("../assets/img/avatars/5.png")}
                     width={200}
                     height={50}
                     className="w-10 h-auto rounded-circle"
@@ -82,7 +86,7 @@ function RegisterConsultant() {
                   onClick={() => handleClickprofile()}
                 >
                   <Image
-                    src={require("../assets/img/avatars/1.png")}
+                    src={require("../assets/img/avatars/6.png")}
                     width={200}
                     height={50}
                     className="w-10 h-auto rounded-circle"
@@ -94,7 +98,7 @@ function RegisterConsultant() {
                   onClick={() => handleClickprofile()}
                 >
                   <Image
-                    src={require("../assets/img/avatars/1.png")}
+                    src={require("../assets/img/avatars/7.png")}
                     width={200}
                     height={50}
                     className="w-10 h-auto rounded-circle"
@@ -106,7 +110,7 @@ function RegisterConsultant() {
                   onClick={() => handleClickprofile()}
                 >
                   <Image
-                    src={require("../assets/img/avatars/1.png")}
+                    src={require("../assets/img/avatars/7.png")}
                     width={200}
                     height={50}
                     className="w-10 h-auto rounded-circle"
@@ -157,52 +161,7 @@ function RegisterConsultant() {
               Ignorer pour l{"'"}instant
             </Link>
           </main>
-          <footer className="content-footer footer bg-footer-theme">
-            <div className="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-              <div className="mb-2 mb-md-0">
-                © 2023 , made with WIB-COMPANY by
-                <a
-                  href="https://themeselection.com"
-                  target="_blank"
-                  className="footer-link fw-bolder"
-                >
-                  ThemeSelection
-                </a>
-              </div>
-              <div>
-                <a
-                  href="https://themeselection.com/license/"
-                  className="footer-link me-4"
-                  target="_blank"
-                >
-                  License
-                </a>
-                <a
-                  href="https://themeselection.com/"
-                  target="_blank"
-                  className="footer-link me-4"
-                >
-                  More Themes
-                </a>
-
-                <a
-                  href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                  target="_blank"
-                  className="footer-link me-4"
-                >
-                  Documentation
-                </a>
-
-                <a
-                  href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                  target="_blank"
-                  className="footer-link me-4"
-                >
-                  Support
-                </a>
-              </div>
-            </div>
-          </footer>
+          <FooterComponent />
         </div>
       </div>
     </div>

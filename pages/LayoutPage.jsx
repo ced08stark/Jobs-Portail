@@ -1,11 +1,9 @@
 
-import Head from "next/head";
-import { Inter } from "next/font/google";
 import React, { useState, ReactElement } from "react";
 import Image from "next/image";
 import SideBar from "../components/SideBar";
 import ProfilOption from "../components/ProfilOption";
-import { BrowserRouter } from "react-router-dom";
+
 
 function LayoutPage({children}) {
 

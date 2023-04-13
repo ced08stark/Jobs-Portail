@@ -34,9 +34,7 @@ function RegisterPage() {
                 method="POST"
               >
                 <div className="mb-3">
-                  <label  className="form-label">
-                    Username
-                  </label>
+                  <label className="form-label">Username</label>
                   <input
                     type="text"
                     className="form-control"
@@ -47,9 +45,7 @@ function RegisterPage() {
                   />
                 </div>
                 <div className="mb-3">
-                  <label  className="form-label">
-                    Email
-                  </label>
+                  <label className="form-label">Email</label>
                   <input
                     type="text"
                     className="form-control w-32"
@@ -59,9 +55,7 @@ function RegisterPage() {
                   />
                 </div>
                 <div className="mb-3 form-password-toggle">
-                  <label className="form-label" >
-                    Password
-                  </label>
+                  <label className="form-label">Password</label>
                   <div className="input-group input-group-merge">
                     <input
                       type="password"
@@ -84,6 +78,7 @@ function RegisterPage() {
                       type="checkbox"
                       id="terms-conditions"
                       name="terms"
+                      readOnly
                     />
                     <label className="form-check-label" for="terms-conditions">
                       I agree to
@@ -91,7 +86,9 @@ function RegisterPage() {
                     </label>
                   </div>
                 </div>
-                <button className="btn btn-primary d-grid w-100">Sign up</button>
+                <button className="btn btn-primary d-grid w-100">
+                  Sign up
+                </button>
               </form>
 
               <p className="text-center">

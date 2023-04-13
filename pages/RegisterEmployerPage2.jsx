@@ -2,61 +2,22 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useContext } from "react";
-import { AdminContext } from "../context/AdminContext";
+import { UserContext } from "../context/UserContext";
 import Link from "next/link";
 import AlertComponent from "../components/AlertComponent";
 import { ArrowRightIcon, PhotoIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
 function RegisterEmployer() {
-  const { setCurrentAdmin } = useContext(AdminContext);
+ 
   const router = useRouter();
-  const [admin, setAdmin] = useState({
-    first_name: "tony",
-    last_name: "stark",
-    address: "r",
-    email: "r",
-    password: "r",
-    picture: "r",
-  });
-
+ const { currentUser, setCurrentUser } = useContext(UserContext);
   const [data, setData] = useState({ message: "", statusCode: "" });
   const [message, setMessage] = useState("");
   const [showMessage, setShowMessage] = useState(false);
   const [isload, setIsLoad] = useState(false);
   //alert(process.env.BASE_URL);
-  const AddAdmin = async () => {
-    setIsLoad(true);
-
-    await axios
-      .post(
-        "http://127.0.0.1:8000/admin/register",
-        {
-          first_name: admin.first_name,
-          last_name: admin.last_name,
-          address: admin.address,
-          email: admin.email,
-          password: admin.password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        }
-      )
-      .then((res) => {
-        setMessage(res.status);
-        console.log(res);
-        //setShowMessage(true);
-        setIsLoad(false);
-      })
-      .catch((err) => console.log(err));
-
-    if (message == 200) {
-      setCurrentAdmin(admin);
-      router.push("/DashboardPage");
-    }
-  };
+  
 
   useEffect(() => {});
   return (
@@ -236,6 +197,12 @@ function RegisterEmployer() {
                   <input
                     type="file"
                     className="absolute w-full h-full cursor-pointer opacity-0"
+                    onChange={(e) =>
+                      setCurrentUser({
+                        ...currentUser,
+                        company_logo: e.target.value,
+                      })
+                    }
                   />
                 </div>
               </div>
@@ -261,6 +228,12 @@ function RegisterEmployer() {
                       placeholder="ACME Inc."
                       aria-label="ACME Inc."
                       aria-describedby="basic-icon-default-company2"
+                      onChange={(e) =>
+                        setCurrentUser({
+                          ...currentUser,
+                          company_name: e.target.value,
+                        })
+                      }
                     />
                   </div>
                 </div>
@@ -287,11 +260,17 @@ function RegisterEmployer() {
                       placeholder="John Doe"
                       aria-label="John Doe"
                       aria-describedby="basic-icon-default-fullname2"
+                      onChange={(e) =>
+                        setCurrentUser({
+                          ...currentUser,
+                          company_web: e.target.value,
+                        })
+                      }
                     />
                   </div>
                 </div>
               </div>
-             
+
               <div className="row mb-3">
                 <label
                   className="col-sm-2 form-label"
@@ -314,6 +293,12 @@ function RegisterEmployer() {
                       placeholder="658 799 8941"
                       aria-label="658 799 8941"
                       aria-describedby="basic-icon-default-phone2"
+                      onChange={(e) =>
+                        setCurrentUser({
+                          ...currentUser,
+                          phone: e.target.value,
+                        })
+                      }
                     />
                   </div>
                 </div>
@@ -338,6 +323,12 @@ function RegisterEmployer() {
                       placeholder="ex. 10"
                       aria-label="john.doe"
                       aria-describedby="basic-icon-default-email2"
+                      onChange={(e) =>
+                        setCurrentUser({
+                          ...currentUser,
+                          company_size: e.target.value,
+                        })
+                      }
                     />
                   </div>
                 </div>

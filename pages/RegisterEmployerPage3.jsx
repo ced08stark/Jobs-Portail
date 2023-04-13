@@ -1,14 +1,16 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import * as Icons from '@heroicons/react/24/outline'
 import ModalLoadComponent from '../components/ModalLoadComponent';
+import { UserContext } from "../context/UserContext";
 
 function RegisterEmployerPage3() {
+  const { currentUser, setCurrentUser } = useContext(UserContext);
   return (
     <div class="h-auto flex space-y-2 flex-col mt-8 lg:mx-32 justify-center pt-4">
       <div className="">
         <div className=" ">
           <div className="">
-            <form className=''>
+            <form className="">
               <div className="row mb-3">
                 <label
                   className="col-sm-2 col-form-label"
@@ -24,7 +26,16 @@ function RegisterEmployerPage3() {
                     >
                       <Icons.GlobeAmericasIcon className="w-4 h-4" />
                     </span>
-                    <select id="country" className="select2 form-select">
+                    <select
+                      id="country"
+                      className="select2 form-select"
+                      onChange={(e) =>
+                        setCurrentUser({
+                          ...currentUser,
+                          country: e.target.value,
+                        })
+                      }
+                    >
                       <option value="">Select</option>
                       <option value="Australia">Australia</option>
                       <option value="Bangladesh">Bangladesh</option>
@@ -78,6 +89,12 @@ function RegisterEmployerPage3() {
                       placeholder="san francisco"
                       aria-label="John Doe"
                       aria-describedby="basic-icon-default-fullname2"
+                      onChange={(e) =>
+                        setCurrentUser({
+                          ...currentUser,
+                          city: e.target.value,
+                        })
+                      }
                     />
                   </div>
                 </div>
@@ -105,6 +122,12 @@ function RegisterEmployerPage3() {
                       placeholder="logbessou"
                       aria-label="658 799 8941"
                       aria-describedby="basic-icon-default-phone2"
+                      onChange={(e) =>
+                        setCurrentUser({
+                          ...currentUser,
+                          quarter: e.target.value,
+                        })
+                      }
                     />
                   </div>
                 </div>
@@ -131,6 +154,12 @@ function RegisterEmployerPage3() {
                       placeholder="rue 658"
                       aria-label="658 799 8941"
                       aria-describedby="basic-icon-default-phone2"
+                      onChange={(e) =>
+                        setCurrentUser({
+                          ...currentUser,
+                          address: e.target.value,
+                        })
+                      }
                     />
                   </div>
                 </div>
@@ -157,6 +186,12 @@ function RegisterEmployerPage3() {
                       placeholder="pbox 658 890"
                       aria-label="658 799 8941"
                       aria-describedby="basic-icon-default-phone2"
+                      onChange={(e) =>
+                        setCurrentUser({
+                          ...currentUser,
+                          code: e.target.value,
+                        })
+                      }
                     />
                   </div>
                 </div>
@@ -173,7 +208,16 @@ function RegisterEmployerPage3() {
                     <span className="input-group-text">
                       <i className="bx bx-group"></i>
                     </span>
-                    <select id="timeZones" className="select2 form-select">
+                    <select
+                      id="timeZones"
+                      className="select2 form-select"
+                      onChange={(e) =>
+                        setCurrentUser({
+                          ...currentUser,
+                          timezone: e.target.value,
+                        })
+                      }
+                    >
                       <option value="">Select Timezone</option>
                       <option value="-12">
                         (GMT-12:00) International Date Line West

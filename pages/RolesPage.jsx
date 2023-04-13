@@ -1,11 +1,14 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { WrenchIcon, EyeIcon, PencilIcon, ArrowLeftIcon, BuildingLibraryIcon } from "@heroicons/react/24/outline";
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import {UserContext} from "../context/UserContext"
 
 
 function RolesPage() {
+  
   const [principalRoute, setPrincipalRoute] = useState("/RegisterConsultant")
+  const { currentUser, setCurrentUser } = useContext(UserContext);
   const router = useRouter();
     const handleClick = (id)=>{
         let active = document.querySelector('.bg-indigo-500')
@@ -19,10 +22,13 @@ function RolesPage() {
         currentElement.classList.remove("text-indigo-500");
         currentElement.classList.add("bg-indigo-500");
         currentElement.classList.add("text-white");
+        
         if(id==2){
+          setCurrentUser({ role: "Employer"})
           setPrincipalRoute("/RegisterEmployer")
         }
         else{
+          setCurrentUser({ role: "FreeLance" });
           setPrincipalRoute("/RegisterConsultant");
         }
         

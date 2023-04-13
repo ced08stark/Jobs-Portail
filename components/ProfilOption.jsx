@@ -1,13 +1,17 @@
 import React from 'react'
 import Image from "next/image";
 import Link from "next/link";
-import { AdminContext } from "../context/AdminContext";
+import  { useRouter } from 'next/router';
+import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
+import RemoveCookies from '../hooks/removeCookies';
 
 
 function ProfilOption() {
-   const { currentAdmin, setCurrentAdmin } = useContext(AdminContext);
+  const router = useRouter()
+   const { currentUser, setCurrentUser } = useContext(UserContext);
    const handleClick = () =>{
+
     let profileMenu = document.querySelector("#profileMenu");
     profileMenu.classList.remove("scale-100");
     profileMenu.classList.add("scale-0");
@@ -41,8 +45,8 @@ function ProfilOption() {
               </div>
             </div>
             <div className="flex-grow-1">
-              <span className="fw-semibold d-block">{currentAdmin?.email}</span>
-              <small className="text-muted">{currentAdmin?.first_name}</small>
+              <span className="fw-semibold d-block">{currentUser?.email}</span>
+              <small className="text-muted">{currentUser?.first_name}</small>
             </div>
           </div>
         </Link>
@@ -77,10 +81,26 @@ function ProfilOption() {
         <div className="dropdown-divider"></div>
       </li>
       <li>
-        <Link className="dropdown-item" href="/LoginPage">
+        <div className="dropdown-item cursor-pointer" onClick={()=> {
+          RemoveCookies("currentUser")
+          RemoveCookies("token");
+          setCurrentUser({
+            ...currentUser,
+            id: null,
+            first_name: null,
+            last_name: null,
+            email: null,
+            password: null,
+            profile: null,
+            role: null,
+            employerID: null,
+          });
+          router.push('LoginPage')
+
+        }}>
           <i className="bx bx-power-off me-2"></i>
           <span className="align-middle">Log Out</span>
-        </Link>
+        </div>
       </li>
     </ul>
   );

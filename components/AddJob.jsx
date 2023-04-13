@@ -1,47 +1,116 @@
-import React, {useState} from 'react'
-import Image from 'next/image';
-import {XMarkIcon} from "@heroicons/react/24/outline"
+import React, { useState, useContext, useEffect } from "react";
+import Image from "next/image";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import axios from "axios";
+import { UserContext } from "../context/UserContext";
+import { useRouter } from "next/router";
 
-function AddJob() {
-   
-     const handleAddProjet = (e) => {
-       const lightbox = document.querySelector("#lightbox");
-       const idName = e.target.getAttribute("id");
-       if (idName === "lightbox") {
-         lightbox.classList.remove("scale-100");
-         lightbox.classList.add("scale-0");
-       }
-     };
-     const AddProjet = () => {
-       const lightbox = document.querySelector("#lightbox");
-       
-         lightbox.classList.remove("scale-100");
-         lightbox.classList.add("scale-0");
-       
-     };
-
-     const [projet, setProjet] = useState({
-        name: "",
-        description: "",
-        montant: "0",
-        createdAt: ""
-     })
+function AddJob({ projets, setProjets }) {
+  const [projet, setProjet] = useState({
+    title: null,
+    description: null,
+    createdAt: "",
+  });
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+  
+ 
+  const [isLoading, setIsLoading] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
+  const [message, setMessage] = useState("");
+  const [success, setShowSucces] = useState(false);
+  let date = new Date();
+  const handleAddProjet = (e) => {
+    const lightbox = document.querySelector("#lightbox");
+    const idName = e.target.getAttribute("id");
+    if (idName === "lightbox") {
+      lightbox.classList.remove("scale-100");
+      lightbox.classList.add("scale-0");
+    }
+  };
+  const close = ()=>{
+    lightbox.classList.remove("scale-100");
+    lightbox.classList.add("scale-0");
+    getProjet()
+  }
+ 
+  const AddProjet = async () => {
+    const lightbox = document.querySelector("#lightbox");
+    const describe = document.querySelector("#describe");
     
+    if (projet.title == null || describe.value == null)
+    {
+      setShowMessage(true);
+      setMessage("veuillez remplir les champs correctement svp");
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 2000);
+    }
+    else
+    {
+      setIsLoading(true);
+      const data = await axios
+  .post("https://jobapp-3jo8.onrender.com/users/projet", {
+    name: projet.title,
+    description: describe.value,
+    employerID: currentUser.employerID,
+  })
+  .catch((err) => console.log(err.message));
+setIsLoading(false);
+if (data) {
+  setMessage(data?.data.message);
+  setShowSucces(true);
+  setShowMessage(true);
+  setTimeout(() => {
+    setShowMessage(false);
+    lightbox.classList.remove("scale-100");
+    lightbox.classList.add("scale-0");
+  }, 500);
+} else {
+  setShowSucces(false);
+  setShowMessage(true);
+  setTimeout(() => {
+    setShowMessage(false);
+    lightbox.classList.remove("scale-100");
+    lightbox.classList.add("scale-0");
+  }, 2000);
+}
+getProjet();
+    } 
+    
+  };
+
+  const getProjet = async () => {
+    setIsLoading(true);
+    const data = await axios
+      .get("https://jobapp-3jo8.onrender.com/users/projets")
+      .catch((err) => console.log(err.message));
+    setIsLoading(false);
+    console.log(data);
+
+    if (data?.status == 200) {
+      setProjets(data?.data);
+    }
+  };
+
+  
+
+  
+
   return (
     <section
-      className="fixed z-50  inset-0 w-full h-full dark:text-white  flex items-center justify-center transition-all duration-300 scale-0"
+      className="fixed z-50  inset-0 w-full h-full dark:text-white flex-col   flex items-center justify-center transition-all duration-300 scale-0"
       id="lightbox"
       onClick={handleAddProjet}
     >
       <div
-        className="flex-col space-y-2  flex rounded-md bg-white dark:bg-gray-800 w-[90%]  sm:w-1/2 h-[500px]  overflow-hidden  sm:p-0 shadow-lg shadow-black "
+        className="flex-col space-y-2  flex rounded-md bg-white dark:bg-gray-800 w-[90%]  sm:w-1/2 h-[450px]  overflow-hidden  sm:p-0 shadow-lg shadow-black "
         id="lightbox-body"
       >
         <div className="flex justify-between items-center p-4">
           <span className="text-xl sm:text-3xl font-bold ">Create projet</span>
           <XMarkIcon
             className="w-6 h-6 cursor-pointer"
-            onClick={() => AddProjet()}
+            onClick={() => close()}
           />
         </div>
         <div className="space-y-2">
@@ -51,6 +120,7 @@ function AddJob() {
               type="text"
               className="p-2 border-none outline-1 border outline-indigo-500 rounded-md"
               placeholder="enter your projet name"
+              onChange={(e) => setProjet({ ...projet, title: e.target.value })}
             />
           </div>
           <div className="flex-col flex px-4 space-y-2">
@@ -58,20 +128,9 @@ function AddJob() {
             <textarea
               className="p-2 border-none outline-1 border outline-indigo-500 rounded-md h-32"
               placeholder="enter your projet description"
+              id="describe"
+              
             ></textarea>
-          </div>
-          <div className="flex space-x-2 justify-end items-center px-4">
-            <span className="text-sm sm:text-base">Montant</span>
-            <input
-              onChange={(e) =>
-                setProjet({ ...projet, montant: e.target.value })
-              }
-              type="number"
-              placeholder="$"
-              step={5}
-              min={0}
-              className="p-2 border-none outline-1 border outline-indigo-500 rounded-md sm:p-1"
-            />
           </div>
           <div className="flex items-center justify-end p-4 space-x-3">
             <button
@@ -80,17 +139,47 @@ function AddJob() {
             >
               Cancel
             </button>
-            <button
-              onClick={() => AddProjet()}
-              className="px-10 text-xs sm:text-base sm:px-20  sm:font-semibold py-2 text-white rounded-md font-bold bg-indigo-500"
-            >
-              Create Projet
-            </button>
+            {!isLoading ? (
+              <div className="mb-3">
+                <button
+                  className=" d-grid px-10 w-100 text-white rounded-md py-2 bg-indigo-500 hover:bg-indigo-700"
+                  onClick={() => AddProjet()}
+                >
+                  create project
+                </button>
+              </div>
+            ) : (
+              <div className="mb-3">
+                <button className=" d-grid w-100 text-white flex items-center justify-center rounded-md px-20 py-2 bg-indigo-500 hover:bg-indigo-700">
+                  <div
+                    class="spinner-border spinner-border-sm text-white"
+                    role="status"
+                  >
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
+      {showMessage && (
+        <div
+          className={`${
+            !success ? "bg-red-200 text-red-500" : "bg-green-200 text-green-500"
+          } px-20  border-1 lg:border-2 py-2 my-2 text-center bottom-0 lg:relative z-50 rounded-lg transition-all duration-100 animate-bounce absolute`}
+        >
+          {!success ? (
+            <span className="text-bold text-xs lg:text-base ">{message}</span>
+          ) : (
+            <span className="text-bold text-xs lg:text-base z-50">
+              {message}
+            </span>
+          )}
+        </div>
+      )}
     </section>
   );
 }
 
-export default AddJob
+export default AddJob;

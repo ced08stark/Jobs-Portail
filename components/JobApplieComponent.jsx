@@ -1,52 +1,25 @@
-import React from 'react'
-import Image from 'next/image'
-import * as Icons from "@heroicons/react/24/solid"
+import React from "react";
+import Image from "next/image";
+import * as Icons from "@heroicons/react/24/solid";
 import { setCurrentJob } from "../features/jobSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-function JobComponent({id, title, description, author, authorProfile, montant, delay, type, certification }) 
-{
-  const dispatch = useDispatch()
-  const currentJob = useSelector(setCurrentJob)
-  const onClickModal = ()=>{
-      let modal = document.querySelector("#fullscreenModal");
-      modal.classList.remove("scale-0")
-      dispatch(setCurrentJob(
-        {
-          id: {id},
-          title: {title},
-          role: null,
-          experience: null,
-          description: null,
-          skill: null,
-          certification: {certification},
-          langue: null,
-          isWorkTeam: null,
-          contract: null,
-          delay: {delay},
-          workPreference: null,
-          file: null,
-          rate: {montant}
-        }
-      ))
-     
-
-  }
-
+function JobApplieComponent({
+  id,
+  title,
+  description,
+  author,
+  authorProfile,
+  montant,
+  delay,
+  type,
+  certification,
+}) {
   return (
-    <div
-      className="w-full flex flex-col h-auto md:w-1/2 lg:w-2/5 shadow-lg border p-3 space-y-2 rounded-lg cursor-pointer duration-500 hover:scale-95 m-4"
-      onClick={() => onClickModal()}
-    >
+    <div className="w-full flex flex-col h-auto md:w-1/2 lg:w-[450px] shadow-lg border p-3 space-y-2 rounded-lg cursor-pointer duration-500 hover:scale-95 m-4 relative">
       <div className="flex items-center">
-        <div className="avatar avatar-online">
-          <Image
-            src={require("../assets/img/avatars/1.png")}
-            width={200}
-            height={50}
-            alt="profile"
-            className="w-px-40 h-auto rounded-circle"
-          />
+        <div className="avatar avatar-online flex bg-slate-200 rounded-full items-center justify-center">
+          <Icons.UserCircleIcon className="w-10 h-10" />
         </div>
         <span className="font-bold text-center w-full">{title}</span>
       </div>
@@ -82,8 +55,11 @@ function JobComponent({id, title, description, author, authorProfile, montant, d
           <span className="text-[10px]">{`jusqu'au ${delay} `}</span>
         </div>
       </div>
+      <button className="absolute px-6 text-white font-semibold py-1 rounded-full right-4 top-2 bg-indigo-500 hover:bg-indigo-700">
+        Apply
+      </button>
     </div>
   );
 }
 
-export default JobComponent
+export default JobApplieComponent;
