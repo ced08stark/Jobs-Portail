@@ -38,4 +38,4 @@ export const { setCurrentJob } = jobSlice.actions;
 
 export default jobSlice.reducer;
 
-export const selectCurrentJob = (state) => state.projet.currentJob;
+export const selectCurrentJob = (state) => state.job.currentJob;

@@ -28,6 +28,7 @@ function RegisterConsultantPage() {
     const step2Content = <RegisterEmployerPage3 />;
     const step3Content = <RegisterEmployerPage4 />;
     const { currentUser, setCurrentUser } = useContext(UserContext);
+    console.log(currentUser.role);
     const router = useRouter();
        const getData = async () => {
          
@@ -104,7 +105,7 @@ function RegisterConsultantPage() {
         setIsLoading(true);
         const data = await axios
           .post(
-            "https://jobapp-3jo8.onrender.com/users/registration/employer",
+            "https://jobapp-3jo8.onrender.com/users/registration/consultant",
             {
               email: currentUser?.email,
               password: currentUser?.password,

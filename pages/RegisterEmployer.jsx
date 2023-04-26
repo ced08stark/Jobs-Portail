@@ -25,22 +25,30 @@ function RegisterEmployer() {
   const step3Content = <RegisterEmployerPage3 />;
   const step4Content = <RegisterEmployerPage4 />;
   const { currentUser, setCurrentUser } = useContext(UserContext);
+  //console.log(currentUser.role)
     const [showMessage, setShowMessage] = useState(false);
     const [message, setMessage] = useState("");
   const router = useRouter();
-  const getData = async () => {
-   
-    await axios
-      .post("https://jobapp-3jo8.onrender.com/users/employer", {
-        userID: currentUser.id,
-      })
-      .then(function (data) {
-        setCurrentUser({
-          ...currentUser,
-          employerID: data?.data?.id,
-        });
-      })
-      .catch((err) => console.log(err.message));
+  const getData = async (data) => {
+   alert(data?.data?.user?.id);
+   const d = await axios
+     .post("https://jobapp-3jo8.onrender.com/users/employer", {
+       userID: data?.data?.user?.id,
+     })
+     .catch((err) => console.log(err.message));
+     
+     if (d.status == 200) {
+      setCurrentUser({
+        ...currentUser,
+        employerID: d?.data?.id,
+        id: data?.data?.user?.id,
+        first_name: data?.data?.user?.first_name,
+        last_name: data?.data?.user?.last_name,
+        email: data?.data?.user?.email,
+        role: data?.data?.user?.role,
+      });
+      
+     }
     //console.log(data.data.id);
 
     
@@ -58,17 +66,10 @@ function RegisterEmployer() {
    //console.log(data.data?.data[0]?.id);
    //console.log(data?.data.user?.password);
    if (data.status == 200) {
-     setCurrentUser({
-       ...currentUser,
-       id: data?.data?.user?.id,
-       first_name: data?.data?.user?.first_name,
-       last_name: data?.data?.user?.last_name,
-       email: data?.data?.user?.email,
-       role: data?.data?.user?.role,
-     });
+     
      dispatch(setToken(data?.data.token));
-     alert(data?.data.user.role);
-
+     //alert(data?.data.user.role);
+    
      //  localStorage.setItem(
      //    "user",
      //    JSON.stringify({
@@ -78,24 +79,15 @@ function RegisterEmployer() {
      //      phone: data?.data?.user?.phone,
      //    })
      //  );
-     getData();
-     //setMessage("authentification success");
-     //setShowSucces(true);
-     //setShowMessage(true);
-    //  setTimeout(() => {
-    //    if (currentUser.role == "Employer") {
-    //      router.push("/DashboardPage");
-    //    } else {
-    //      router.push("/Dashboard2");
-    //    }
-    //  }, 2000);
+     getData(data);
+     
    } else {
     //  setShowSucces(false);
     //  setShowMessage(true);
     //  setTimeout(() => {
     //    setShowMessage(false);
     //  }, 2000);
-    alert(null)
+    //alert(null)
    }
  };
   const handleRegister = async () => {

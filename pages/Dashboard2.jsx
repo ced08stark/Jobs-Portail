@@ -1,10 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import FooterComponent from "../components/FooterComponent";
 import Image from "next/image";
-import Link from "next/link";
-import JobComponent from "../components/JobComponent";
-import JobViewComponent from "../components/JobViewComponent";
-import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/router";
 import { selectCurrentProjet, setCurrentProjet } from "../features/projetSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,7 +11,7 @@ import JobApplieComponent from "../components/JobApplieComponent";
 
 function Dashboard2() {
   const [isLoading, setIsLoading] = useState(false);
-  const { currentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
   const token = useSelector(setToken);
   const router = useRouter();
   const currentProjet = useSelector(setCurrentProjet);
@@ -26,7 +22,7 @@ function Dashboard2() {
       .get("https://jobapp-3jo8.onrender.com/users/projet/jobs")
       .catch((err) => console.log(err.message));
     setIsLoading(false);
-    console.log(data);
+   
     if (data?.status == 200) {
       setJobs(data?.data.result);
     }
@@ -112,9 +108,9 @@ function Dashboard2() {
                         </div>
                       </div>
                       <span className="fw-semibold d-block mb-1">Profit</span>
-                      <h3 className="card-title mb-2">$12,628</h3>
+                      <h3 className="card-title mb-2">$0</h3>
                       <small className="text-success fw-semibold">
-                        <i className="bx bx-up-arrow-alt"></i> +72.80%
+                        <i className="bx bx-up-arrow-alt"></i> +0.80%
                       </small>
                     </div>
                   </div>
@@ -152,10 +148,10 @@ function Dashboard2() {
                           </div>
                         </div>
                       </div>
-                      <span>Sales</span>
-                      <h3 className="card-title text-nowrap mb-1">$4,679</h3>
+                      <span>Applicant</span>
+                      <h3 className="card-title text-nowrap mb-1">3</h3>
                       <small className="text-success fw-semibold">
-                        <i className="bx bx-up-arrow-alt"></i> +28.42%
+                        <i className="bx bx-up-arrow-alt"></i> +0.42%
                       </small>
                     </div>
                   </div>
@@ -164,7 +160,7 @@ function Dashboard2() {
             </div>
           </div>
           <main>
-            <div className=" bg-white  overflow-hidden">
+            <div className=" bg-white border-2 border-indigo-500/30 rounded-md  overflow-hidden">
               <div className="py-3 flex-wrap flex overflow-scroll scrollbar-thin  scrollbar-thumb-indigo-200 scrollbar-rounded-* scrollbar-track-gray-100 h-[500px] w-full">
                 {jobLists.map((data) => (
                   <JobApplieComponent
@@ -176,7 +172,8 @@ function Dashboard2() {
                     delay={data.delay}
                     description={data.description}
                     montant={data.montant}
-                    //author={currentUser.company_name}
+                    projetID={data.projetID}
+                    
                   />
                 ))}
               </div>

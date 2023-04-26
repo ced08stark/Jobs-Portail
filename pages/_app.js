@@ -6,6 +6,8 @@ import "../assets/vendor/libs/apex-charts/apex-charts.css";
 import "../assets/vendor/fonts/boxicons.css";
 import "../assets/vendor/css/core.css";
 import "react-step-progress/dist/index.css";
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
 import Router from 'next/router';
 import ProgressBar from "@badrap/bar-of-progress";
 import Head from "next/head";

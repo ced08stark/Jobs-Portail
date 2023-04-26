@@ -86,13 +86,13 @@ function JobsPage() {
     };
      
   return (
-    <div className="layout-wrapper layout-content-navbar">
+    <div className="layout-wrapper layout-content-navbar ">
       {isLoading && <ModalLoadComponent />}
       <div className="layout-container">
         <div className="layout-page">
           <div className="content-wrapper">
             <div className="my-10 mx-4">
-              <div className="w-full h-12 bg-white rounded-md">
+              <div className="w-full h-12 bg-white rounded-md border-2 border-indigo-500/30">
                 <div className="w-full bg-white p-3   overflow-hidden">
                   <button
                     onClick={() => AddProjet()}

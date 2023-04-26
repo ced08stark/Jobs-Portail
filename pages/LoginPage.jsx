@@ -8,6 +8,7 @@ import { setToken } from '../features/token';
 import SetCookies from '../hooks/setCookies'
 import GetCookies from '../hooks/getCookies'
 import RemoveCookies from "../hooks/removeCookies";
+import TaskComponent from '../components/TaskComponent';
 
 export default function LoginPage() {
   const route = useRouter()
@@ -28,7 +29,7 @@ export default function LoginPage() {
           userID: d.data.user.id,
         })
         .catch((err) => console.log(err.message));
-        console.log(data.data.id);
+        
        setCurrentUser({
          ...currentUser,
          employerID: data?.data.id,
@@ -52,7 +53,7 @@ export default function LoginPage() {
        })
        .catch((err) => console.log(err.message));
     setIsLoading(false)
-  //console.log(data.data?.data[0]?.id);
+    console.log(data);
    //console.log(data?.data.user?.password);
       if (data?.status == 200) {
         RemoveCookies('currentUser')
@@ -69,7 +70,6 @@ export default function LoginPage() {
         });
         dispatch(setToken(data?.data.token))
         //alert(data?.data.user.role);
-
         //  localStorage.setItem(
         //    "user",
         //    JSON.stringify({
@@ -185,7 +185,7 @@ export default function LoginPage() {
                       </label>
                     </div>
                   </div>
-
+                      
                   {!isLoading ? (
                     <div className="mb-3">
                       <button

@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import { WrenchIcon, EyeIcon, PencilIcon, ArrowLeftIcon, BuildingLibraryIcon } from "@heroicons/react/24/outline";
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -9,6 +9,10 @@ function RolesPage() {
   
   const [principalRoute, setPrincipalRoute] = useState("/RegisterConsultant")
   const { currentUser, setCurrentUser } = useContext(UserContext);
+ 
+  useEffect(()=>{
+    setCurrentUser({ role: "FreeLance" });
+  }, [])
   const router = useRouter();
     const handleClick = (id)=>{
         let active = document.querySelector('.bg-indigo-500')
