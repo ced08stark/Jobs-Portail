@@ -8,10 +8,13 @@ import { setCurrentProjet } from '../features/projetSlice';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { setToken } from "../features/token";
+import SetCookies from '../hooks/setCookies';
+import GetCookies from "../hooks/getCookies";
 
 
 function ProjetComponent({ id, title, description, setProjets }) {
-  const token = useSelector(setToken);
+  const token = GetCookies("token");
+  
   const [isLoading, setIsLoading] = useState(false);
   const [show, setShow] = useState(false);
   const router = useRouter();
@@ -34,7 +37,7 @@ function ProjetComponent({ id, title, description, setProjets }) {
     await axios
       .delete(`https://jobapp-3jo8.onrender.com/users/projet/delete/${id}`, {
         headers: {
-          Authorization: `basic ${token.payload.token.token}`,
+          Authorization: `basic ${token}`,
         },
       })
       .catch((err) => console.log(err.message));
@@ -120,7 +123,11 @@ function ProjetComponent({ id, title, description, setProjets }) {
                         description: description,
                       })
                     );
-
+                    SetCookies("currentProjet", JSON.stringify({
+                      id: id,
+                      title: title,
+                      description: description,
+                    }));
                     router.push("/ProjetViewPage");
                   }}
                 >

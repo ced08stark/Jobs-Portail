@@ -15,6 +15,8 @@ import RegisterEmployerPage3 from "./RegisterEmployerPage3";
 import RegisterEmployerPage4 from "./RegisterEmployerPage4";
 import { useSelector, useDispatch } from "react-redux";
 import { setToken } from "../features/token";
+import SetCookies from "../hooks/setCookies";
+import RemoveCookies from "../hooks/removeCookies";
 
 function RegisterEmployer() {
   const dispatch = useDispatch();
@@ -47,13 +49,24 @@ function RegisterEmployer() {
         email: data?.data?.user?.email,
         role: data?.data?.user?.role,
       });
+      SetCookies(
+        "currentUser",
+        JSON.stringify({
+          employerID: d?.data.id,
+          id: data?.data?.user?.id,
+          first_name: data?.data?.user?.first_name,
+          last_name: data?.data?.user?.last_name,
+          email: data?.data?.user?.email,
+          role: data?.data?.user?.role,
+        })
+      );
       
      }
     //console.log(data.data.id);
 
     
   };
-  //https://jobapp-3jo8.onrender.com
+ 
  const handleLogin = async (email, password) => {
    setIsLoading(true);
    const data = await axios
@@ -63,32 +76,16 @@ function RegisterEmployer() {
      })
      .catch((err) => console.log(err.message));
    setIsLoading(false);
-   //console.log(data.data?.data[0]?.id);
-   //console.log(data?.data.user?.password);
-   if (data.status == 200) {
      
+   if (data.status == 200) {
+     RemoveCookies("currentUser");
+     RemoveCookies("token");
+     SetCookies("token", data?.data.token);
      dispatch(setToken(data?.data.token));
-     //alert(data?.data.user.role);
-    
-     //  localStorage.setItem(
-     //    "user",
-     //    JSON.stringify({
-     //      email: data?.data?.user?.email,
-     //      first_name: data?.data?.user?.first_name,
-     //      last_name: data?.data?.user?.last_name,
-     //      phone: data?.data?.user?.phone,
-     //    })
-     //  );
+     
      getData(data);
      
-   } else {
-    //  setShowSucces(false);
-    //  setShowMessage(true);
-    //  setTimeout(() => {
-    //    setShowMessage(false);
-    //  }, 2000);
-    //alert(null)
-   }
+   } 
  };
   const handleRegister = async () => {
     setIsLoading(true);
@@ -110,47 +107,20 @@ function RegisterEmployer() {
     if (data?.status == 200) {
       setMessage(data?.data.message);
       setShowSucces(true)
-      setCurrentUser({
-        ...currentUser,
-        id: data?.data?.user?.id,
-      });
       handleLogin(currentUser?.email, currentUser?.password);
-      // localStorage.setItem(
-      //   "user",
-      //   JSON.stringify({
-      //     id: data?.data?.user?.id,
-      //     email: data?.data?.user?.email,
-      //     first_name: data?.data?.user?.first_name,
-      //     last_name: data?.data?.user?.last_name,
-      //     phone: data?.data?.user?.phone,
-      //     role: data?.data?.user?.role,
-      //     profile: data?.data?.user?.profile,
-      //   })
-      // );
+      
        setTimeout(() => {
          setShowMessage(false)
          router.push("/SplashPage");
-       }, 4000);
-    //   setMessage(data?.data.message);
-    //   setShowSucces(true);
-    //   setShowMessage(true);
-    //   setTimeout(() => {
-    //     setShowMessage(false);
-    //     route.push("/DashboardPage");
-    //   }, 2000);
-    // } else {
-    //   setShowSucces(false);
-    //   setShowMessage(true);
-    //   setTimeout(() => {
-    //     setShowMessage(false);
-    //   }, 2000);
+       }, 2000);
+    
     }
     else{
       setMessage("fill a empty field")
       setShowSucces(false)
       setTimeout(() => {
         setShowMessage(false);
-      }, 5000);
+      }, 2000);
     }
   };
 

@@ -5,7 +5,7 @@ import { setCurrentJob } from "../features/jobSlice";
 import { setCurrentApplie } from '../features/applieSlice';
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from 'next/router'
-
+import SetCookies from "../hooks/setCookies";
 function JobApplieComponent2({
   id,
   title,
@@ -21,14 +21,22 @@ function JobApplieComponent2({
   const route = useRouter()
   const dispatch = useDispatch();
   return (
-    <div className="relative bg-white flex flex-col h-auto shadow-lg border p-3 space-y-2 rounded-lg cursor-pointer duration-500 hover:scale-95 m-4"  onClick={()=>{dispatch(
+    <div className="relative bg-white flex flex-col h-auto shadow-lg border p-3 space-y-2 rounded-lg cursor-pointer duration-500 hover:scale-95 m-4"  onClick={()=>{
+      
       dispatch(
         setCurrentApplie({
           jobID: id,
           consultantID: consultantID,
         })
-      )
-    );
+      );
+      SetCookies(
+        "currentApplie",
+        JSON.stringify({
+          jobID: id,
+          consultantID: consultantID,
+        })
+      );
+  
       route.push("TaskPage")}}>
       <Icons.BookmarkIcon className="w-8 h-8 absolute right-0" />
       <div className="flex items-center">

@@ -6,28 +6,32 @@ import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { setToken } from "../features/token";
 import { useSelector, useDispatch } from "react-redux";
+import SetCookies from "../hooks/setCookies";
+import GetCookies from "../hooks/getCookies"
 
 function ApplieToJobPage() {
   const { currentUser, setCurrentUser } = useContext(UserContext);
+  
   const [currentConsultant, setCurrentConsultant] = useState(0)
-  const token = useSelector(setToken);
+  const token = GetCookies("token");
   const [applieJobs, setApplieJob] = useState([])
    const getConsultant = async () => {
-    
+  let user = JSON.parse(GetCookies("currentUser"));
      const data = await axios
        .post(
          `https://jobapp-3jo8.onrender.com/users/consultant/consultantInfo`,
          {
-           userID: currentUser?.id,
+           userID: user?.id,
          },
          {
            headers: {
-             Authorization: `basic ${token.payload.token.token}`,
+             Authorization: `basic ${token}`,
            },
          }
        )
        .catch((err) => console.log(err.message));
      if (data?.status == 200) {
+      
        setCurrentConsultant(data?.data.id);
        const r = await axios
          .post(
@@ -37,7 +41,7 @@ function ApplieToJobPage() {
            },
            {
              headers: {
-               Authorization: `basic ${token.payload.token.token}`,
+               Authorization: `basic ${token}`,
              },
            }
          )
@@ -45,6 +49,7 @@ function ApplieToJobPage() {
         //console.log(r.data.result);
         if(r?.status == 200){
          var i = 0;
+        
           for(i = 0; i<r.data.result.length; i++){
              //console.log(r.data.result[i].jobID);
              
@@ -56,7 +61,7 @@ function ApplieToJobPage() {
                       )
                       .catch((err) => console.log(err.message));
 
-                    if(jobs.status == 200){
+                    if(jobs?.status == 200){
                       console.log(jobs);
                           
                           setApplieJob((applieJobs) => [
@@ -74,7 +79,10 @@ function ApplieToJobPage() {
     
    };
 
+    
+
    useEffect(()=>{
+     
     getConsultant()
 
     

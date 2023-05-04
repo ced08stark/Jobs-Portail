@@ -8,6 +8,7 @@ import { setToken } from "../features/token";
 import { UserContext } from "../context/UserContext";
 import axios from "axios";
 import JobApplieComponent from "../components/JobApplieComponent";
+import GetCookies from "../hooks/getCookies";
 
 function Dashboard2() {
   const [isLoading, setIsLoading] = useState(false);
@@ -27,10 +28,14 @@ function Dashboard2() {
       setJobs(data?.data.result);
     }
   };
+  
   useEffect(() => {
-    if (currentUser?.id == null) {
-      router.push("/LoginPage")
-    }
+    let user = GetCookies("currentUser");
+    if (currentUser?.id == null && user == null) {
+        router.push("/LoginPage");
+      } else if (currentUser?.id == null) {
+        setCurrentUser(JSON.parse(user));
+    }  
   });
   useEffect(()=>{
     //alert(jobLists.length)

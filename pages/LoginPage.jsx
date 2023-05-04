@@ -39,6 +39,17 @@ export default function LoginPage() {
          email: d?.data?.user?.email,
          role: d?.data?.user?.role,
        });
+       SetCookies(
+         "currentUser",
+         JSON.stringify({
+           employerID: data?.data.id,
+           id: d?.data?.user?.id,
+           first_name: d?.data?.user?.first_name,
+           last_name: d?.data?.user?.last_name,
+           email: d?.data?.user?.email,
+           role: d?.data?.user?.role,
+         })
+       );
          //alert(data?.data.id);
        
      };
@@ -58,7 +69,7 @@ export default function LoginPage() {
       if (data?.status == 200) {
         RemoveCookies('currentUser')
         RemoveCookies("token");
-        SetCookies('currentUser', JSON.stringify(data?.data.user))
+        
         SetCookies("token", data?.data.token);
         setCurrentUser({
           ...currentUser,
@@ -68,6 +79,7 @@ export default function LoginPage() {
           email: data?.data?.user?.email,
           role: data?.data?.user?.role,
         });
+        
         dispatch(setToken(data?.data.token))
         //alert(data?.data.user.role);
         //  localStorage.setItem(

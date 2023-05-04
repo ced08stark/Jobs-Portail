@@ -4,9 +4,10 @@ import axios from 'axios'
 import { useSelector, useDispatch } from "react-redux";
 import { setToken } from "../features/token";
 import { setCurrentApplie } from "../features/applieSlice";
+import GetCookies from '../hooks/getCookies';
 
 function TaskComponent({ id, description, setTaskList }) {
-  const token = useSelector(setToken);
+  const token = GetCookies("token")
   const currentApplie = useSelector(setCurrentApplie);
   const getAllTask = async () => {
     const data = await axios
@@ -19,7 +20,7 @@ function TaskComponent({ id, description, setTaskList }) {
         },
         {
           headers: {
-            Authorization: `basic ${token.payload.token.token}`,
+            Authorization: `basic ${token}`,
           },
         }
       )
@@ -40,7 +41,7 @@ function TaskComponent({ id, description, setTaskList }) {
         {
           headers: {
             Authorization:
-              `basic ${token.payload.token.token}`,
+              `basic ${token}`,
           },
         }
       )

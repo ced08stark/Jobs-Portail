@@ -17,17 +17,22 @@ import GetCookies from "../hooks/getCookies";
 //let infoUser = {};
 function DashboardPage() {
     const { currentUser, setCurrentUser } = useContext(UserContext);
-    let user = GetCookies("currentUser")
+   
+
     //alert(currentUser?.employerID);
     const route = useRouter()
-    const token = useSelector(setToken)
+    const token = GetCookies("token")
       //alert(currentUser?.employerID)
      useEffect(() => {
-      if (currentUser?.id == null) {
-        //setCurrentUser(JSON.parse(user));
+      let user = GetCookies("currentUser");
+      if (currentUser?.id == null && user == null ) {
+        route.push("/LoginPage")
+      }
+      else if (currentUser?.id == null) {
+        setCurrentUser(JSON.parse(user));
       }
       
-    });
+    }, []);
     
 
      

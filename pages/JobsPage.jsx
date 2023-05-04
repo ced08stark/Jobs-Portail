@@ -10,7 +10,8 @@ import axios from "axios";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import ErrorPage from "./ErrorPage";
-import { data } from "autoprefixer";
+import GetCookies from "../hooks/getCookies";
+
 
 
 function JobsPage() {
@@ -19,7 +20,7 @@ function JobsPage() {
     const [message, setMessage] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const { currentUser, setCurrentUser } = useContext(UserContext);
-     const [projets, setProjets] = useState([
+    const [projets, setProjets] = useState([
       //  {
       //    id: 1,
       //    title: "management projet",
@@ -64,6 +65,15 @@ function JobsPage() {
       //alert(projets.length);
        getProjet();
      }, []);
+
+     useEffect(() => {
+       let user = GetCookies("currentUser");
+       if (currentUser?.id == null && user == null) {
+         route.push("/LoginPage");
+       } else if (currentUser?.id == null) {
+         setCurrentUser(JSON.parse(user));
+       }
+     });
      
 
    

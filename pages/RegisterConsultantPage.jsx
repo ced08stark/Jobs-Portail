@@ -10,7 +10,8 @@ import RegisterEmployerPage4 from "./RegisterEmployerPage4";
 import axios from "axios"
 import { useSelector, useDispatch } from "react-redux";
 import { setToken } from "../features/token";
-
+import SetCookies from "../hooks/setCookies";
+import RemoveCookies from "../hooks/removeCookies"
 
 
 
@@ -30,77 +31,81 @@ function RegisterConsultantPage() {
     const { currentUser, setCurrentUser } = useContext(UserContext);
     console.log(currentUser.role);
     const router = useRouter();
-       const getData = async () => {
-         
-         await axios
-           .post("https://jobapp-3jo8.onrender.com/users/consultant", {
-             userID: currentUser.id,
-           })
-           .then(function (data) {
-             setCurrentUser({
-               ...currentUser,
-               employerID: data?.data?.id,
-             });
-           })
-           .catch((err) => console.log(err.message));
-         //console.log(data.data.id);
+      const getData = async (d) => {
+        //alert(result?.data?.user?.id);
+        alert(d)
+        const data = await axios
+          .post("https://jobapp-3jo8.onrender.com/users/employer", {
+            userID: d.data.user.id,
+          })
+          .catch((err) => console.log(err.message));
 
-        
-       };
-       //https://jobapp-3jo8.onrender.com
-       const handleLogin = async (email, password) => {
-         setIsLoading(true);
-         const data = await axios
-           .post("https://jobapp-3jo8.onrender.com/users/login", {
-             email: `${email.toString()}`,
-             password: `${password.toString()}`,
-           })
-           .catch((err) => console.log(err.message));
-         setIsLoading(false);
-         //console.log(data.data?.data[0]?.id);
-         //console.log(data?.data.user?.password);
-         if (data?.status == 200) {
+        setCurrentUser({
+          ...currentUser,
+          employerID: data?.data.id,
+          id: d?.data?.user?.id,
+          first_name: d?.data?.user?.first_name,
+          last_name: d?.data?.user?.last_name,
+          email: d?.data?.user?.email,
+          role: d?.data?.user?.role,
+        });
+        SetCookies(
+          "currentUser",
+          JSON.stringify({
+            employerID: data?.data.id,
+            id: d?.data?.user?.id,
+            first_name: d?.data?.user?.first_name,
+            last_name: d?.data?.user?.last_name,
+            email: d?.data?.user?.email,
+            role: d?.data?.user?.role,
+          })
+        );
+
+        setTimeout(() => {
+            router.push("/SplashPage");
+        }, 2000);
+        //alert(data?.data.id);
+      };
+
+      const handleLogin = async (email, password) => {
+        alert("connexion")
+        setIsLoading(true);
+        const data = await axios
+          .post("https://jobapp-3jo8.onrender.com/users/login", {
+            email: `${email}`,
+            password: `${password}`,
+          })
+          .catch((err) => console.log(err.message));
+        setIsLoading(false);
+        console.log(data);
+        //console.log(data?.data.user?.password);
+        if (data?.status == 200) {
+          RemoveCookies("currentUser");
+          RemoveCookies("token");
+          SetCookies("token", data?.data.token);
+          setCurrentUser({
+            ...currentUser,
+            id: data?.data?.user?.id,
+            first_name: data?.data?.user?.first_name,
+            last_name: data?.data?.user?.last_name,
+            email: data?.data?.user?.email,
+            role: data?.data?.user?.role,
+          });
+
+          dispatch(setToken(data?.data.token));
+          getData(data);
+          setMessage("authentification success");
+          setShowSucces(true);
+          setShowMessage(true);
           
-           setCurrentUser({
-             ...currentUser,
-             id: data?.data?.user?.id,
-             first_name: data?.data?.user?.first_name,
-             last_name: data?.data?.user?.last_name,
-             email: data?.data?.user?.email,
-             role: data?.data?.user?.role,
-           });
-           dispatch(setToken(data?.data.token));
-            
-
-           //  localStorage.setItem(
-           //    "user",
-           //    JSON.stringify({
-           //      email: data?.data?.user?.email,
-           //      first_name: data?.data?.user?.first_name,
-           //      last_name: data?.data?.user?.last_name,
-           //      phone: data?.data?.user?.phone,
-           //    })
-           //  );
-           getData();
-           //setMessage("authentification success");
-           //setShowSucces(true);
-           //setShowMessage(true);
-           //  setTimeout(() => {
-           //    if (currentUser.role == "Employer") {
-           //      router.push("/DashboardPage");
-           //    } else {
-           //      router.push("/Dashboard2");
-           //    }
-           //  }, 2000);
-         } else {
-           //  setShowSucces(false);
-           //  setShowMessage(true);
-           //  setTimeout(() => {
-           //    setShowMessage(false);
-           //  }, 2000);
-           
-         }
-       };
+        } else {
+          setShowSucces(false);
+          setShowMessage(true);
+          setTimeout(() => {
+            setShowMessage(false);
+          }, 2000);
+        }
+      };
       const handleRegister = async () => {
         setIsLoading(true);
         const data = await axios
@@ -142,10 +147,7 @@ function RegisterConsultantPage() {
       //     profile: data?.data?.user?.profile,
       //   })
       // );
-       setTimeout(() => {
-         setShowMessage(false)
-         router.push("/SplashPage");
-       }, 4000);
+       
     //   setMessage(data?.data.message);
     //   setShowSucces(true);
     //   setShowMessage(true);
@@ -165,7 +167,7 @@ function RegisterConsultantPage() {
       setShowSucces(false)
       setTimeout(() => {
         setShowMessage(false);
-      }, 5000);
+      }, 1000);
     }
           // localStorage.setItem(
           //   "user",

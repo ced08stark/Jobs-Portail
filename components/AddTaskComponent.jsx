@@ -8,6 +8,7 @@ import { DateRangePicker } from "react-date-range";
 import { useSelector, useDispatch } from "react-redux";
 import { setToken } from "../features/token";
 import { setCurrentApplie } from "../features/applieSlice";
+import GetCookies from "../hooks/getCookies";
 
 function AddTaskComponent({ setTaskList }) {
   // const { currentUser, setCurrentUser } = useContext(UserContext);
@@ -16,10 +17,11 @@ function AddTaskComponent({ setTaskList }) {
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState("");
   const [success, setShowSucces] = useState(false);
-   const token = useSelector(setToken);
+   const token = GetCookies("token");
   const currentApplie = useSelector(setCurrentApplie);
   const [startDate, setDateStart] = useState(new Date());
   const [endDate, setDateEnd] = useState(new Date());
+  const { currentUser, setCurrentUser } = useContext(UserContext);
 
   const handleSelect = (ranges) => {
     setDateStart(ranges.selection.startDate);
@@ -41,6 +43,17 @@ function AddTaskComponent({ setTaskList }) {
     lightbox.classList.add("scale-0");
   };
 
+  useEffect(() => {
+    let user = GetCookies("currentUser");
+    let applie = GetCookies("currentApplie");
+    if (currentUser?.id == null && user == null) {
+      route.push("/LoginPage");
+    } else if (currentUser?.id == null) {
+      setCurrentUser(JSON.parse(user));
+      setCurrentApplie(JSON.parse(applie));
+    }
+  });
+
   const getAllTask = async () => {
     const data = await axios
       .post(
@@ -52,7 +65,7 @@ function AddTaskComponent({ setTaskList }) {
         },
         {
           headers: {
-            Authorization: `basic ${token.payload.token.token}`,
+            Authorization: `basic ${token}`,
           },
         }
       )
@@ -91,7 +104,7 @@ function AddTaskComponent({ setTaskList }) {
           },
           {
             headers: {
-              Authorization: `basic ${token.payload.token.token}`,
+              Authorization: `basic ${token}`,
             },
           }
         )

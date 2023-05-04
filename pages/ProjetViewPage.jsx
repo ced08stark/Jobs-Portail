@@ -13,11 +13,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { setToken } from '../features/token';
 import { UserContext } from '../context/UserContext';
 import axios from 'axios'
+import GetCookies from '../hooks/getCookies';
 
 function ProjetViewPage() {
   const [isLoading, setIsLoading] = useState(false);
-  const {currentUser} = useContext(UserContext);
-  const token = useSelector(setToken)
+  const {currentUser, setCurrentUser} = useContext(UserContext);
+  const token = GetCookies("token");
+  const dispatch = useDispatch()
   const router = useRouter()
   const currentProjet = useSelector(setCurrentProjet)
   const [jobLists, setJobs] = useState([])
@@ -27,7 +29,7 @@ function ProjetViewPage() {
      const data = await axios
        .get("https://jobapp-3jo8.onrender.com/users/projet/jobs", {
          headers: {
-           Authorization: `basic ${token.payload.token.token}`,
+           Authorization: `basic ${token}`,
          },
        })
        .catch((err) => console.log(err.message));
@@ -40,6 +42,19 @@ function ProjetViewPage() {
    useEffect(() => {
      //console.log(token);
      getAllJob();
+   }, []);
+   useEffect(() => {
+     let user = GetCookies("currentUser");
+     let projet = GetCookies("currentProjet");
+     //console.log(JSON.parse(projet));
+
+     if (currentUser?.id == null && user == null) {
+       router.push("/LoginPage");
+     } else if (currentUser?.id == null) {
+       setCurrentUser(JSON.parse(user));
+       //console.log(projet);
+       dispatch(setCurrentProjet(JSON.parse(projet)));
+     }
    }, []);
   return (
     <div className="w-full h-full">

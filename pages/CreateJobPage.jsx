@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import CreateJobPage1 from "./CreateJobPage1"
 import CreateJobPage2 from './CreateJobPage2'
 import CreateJobPage3 from './CreateJobPage3'
@@ -10,6 +10,8 @@ import { setCurrentProjet } from '../features/projetSlice';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { setToken } from '../features/token';
+import GetCookies from "../hooks/getCookies";
+import { UserContext } from "../context/UserContext";
 
 
 function CreateJobPage() {
@@ -17,17 +19,19 @@ function CreateJobPage() {
  const step1Content = <CreateJobPage1 />;
  const step2Content = <CreateJobPage2 />;
  const step3Content = <CreateJobPage3 />;
- const token = useSelector(setToken);
+ //const token = useSelector(setToken);
+ const { currentUser, setCurrentUser } = useContext(UserContext);
  const [isLoading, setIsLoading] = useState(false);
   const job = useSelector(setCurrentJob);
   const cprojet = useSelector(setCurrentProjet);
   const [success, setShowSucces] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState("");
+  const token = GetCookies("token")
 const dispatch = useDispatch();
  
-
  const createJob = async () => {
+
     
      setIsLoading(true);
      //alert(job.payload.job.currentJob.description);
@@ -54,7 +58,7 @@ const dispatch = useDispatch();
          },
          {
            headers: {
-             Authorization: `basic ${token.payload.token.token}`,
+             Authorization: `basic ${token}`,
            },
          }
        )
@@ -78,9 +82,24 @@ const dispatch = useDispatch();
          setShowMessage(false);
        }, 2000);
      }
+
     
    
  };
+
+ useEffect(() => {
+   let user = GetCookies("currentUser");
+   let projet = GetCookies("currentProjet");
+   //console.log(JSON.parse(projet));
+
+   if (currentUser?.id == null && user == null) {
+     router.push("/LoginPage");
+   } else if (currentUser?.id == null) {
+     setCurrentUser(JSON.parse(user));
+     //console.log(projet);
+     dispatch(setCurrentProjet(JSON.parse(projet)));
+   }
+ }, []);
 
 
  function step2Validator() {

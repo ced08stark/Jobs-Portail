@@ -18,12 +18,13 @@ import TaskComponent from "../components/TaskComponent"
 import AddTaskComponent from "../components/AddTaskComponent";
 import ShowTask from "../components/ShowTask";
 import { setCurrentApplie } from "../features/applieSlice";
-
+import GetCookies from "../hooks/getCookies";
 
 
 function TaskPage() {
+  const { currentUser, setCurrentUser } = useContext(UserContext);
     const [TaskList, setTaskList] = useState([]);
-     const token = useSelector(setToken);
+     const token = GetCookies('token');
      const currentApplie = useSelector(setCurrentApplie);
     const [currentTask, setCurrentTask] = useState({
       startDate: new Date(),
@@ -43,7 +44,7 @@ function TaskPage() {
           },
           {
             headers: {
-              Authorization: `basic ${token.payload.token.token}`,
+              Authorization: `basic ${token}`,
             },
           }
         )
@@ -57,6 +58,17 @@ function TaskPage() {
     useEffect(() => {
      getAllTask();
     }, []);
+
+    useEffect(() => {
+      let user = GetCookies("currentUser");
+      let applie = GetCookies("currentApplie");
+      if (currentUser?.id == null && user == null) {
+        route.push("/LoginPage");
+      } else if (currentUser?.id == null) {
+        setCurrentUser(JSON.parse(user));
+        setCurrentApplie(JSON.parse(applie));
+      }
+    });
   
     const AddProjet = () => {
       const lightbox = document.querySelector("#lightbox");

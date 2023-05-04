@@ -8,6 +8,7 @@ import FooterComponent from '../components/FooterComponent';
 import { useSelector, useDispatch } from "react-redux";
 import { setToken } from "../features/token";
 
+
 function RegisterConsultant() {
   
   return (

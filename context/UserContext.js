@@ -31,6 +31,7 @@ function Context({children}){
       langue: "",
       ancienne: "",
       employerID: null,
+      consultantID: null,
     });
 
     return (

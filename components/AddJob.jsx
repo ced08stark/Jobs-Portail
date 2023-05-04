@@ -4,6 +4,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 import { UserContext } from "../context/UserContext";
 import { useRouter } from "next/router";
+import GetCookies from "../hooks/getCookies";
 
 function AddJob({ projets, setProjets }) {
   const [projet, setProjet] = useState({
@@ -28,6 +29,7 @@ function AddJob({ projets, setProjets }) {
     }
   };
   const close = ()=>{
+     const lightbox = document.querySelector("#lightbox");
     lightbox.classList.remove("scale-100");
     lightbox.classList.add("scale-0");
     getProjet()
@@ -91,6 +93,15 @@ getProjet();
       setProjets(data?.data);
     }
   };
+
+   useEffect(() => {
+     let user = GetCookies("currentUser");
+     if (currentUser?.id == null && user == null) {
+       route.push("/LoginPage");
+     } else if (currentUser?.id == null) {
+       setCurrentUser(JSON.parse(user));
+     }
+   });
 
   
 

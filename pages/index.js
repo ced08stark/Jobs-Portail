@@ -18,7 +18,6 @@ export default function Home() {
   const [showProfile, setShowProfile] = useState(false);
   
 
-
   return (
     <>
       <div>{currentUser?.role == "Employer"?<DashboardPage />: <Dashboard2 />} </div>

@@ -82,8 +82,6 @@ function ProfilOption() {
       </li>
       <li>
         <div className="dropdown-item cursor-pointer" onClick={()=> {
-          RemoveCookies("currentUser")
-          RemoveCookies("token");
           setCurrentUser({
             ...currentUser,
             id: null,
@@ -94,6 +92,7 @@ function ProfilOption() {
             profile: null,
             role: null,
             employerID: null,
+            consultantID: null,
           });
           router.push('LoginPage')
 
